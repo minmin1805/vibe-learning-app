@@ -26,9 +26,9 @@ function Signup() {
 
     try {
       const res = await auth.signup({name, email, password});
-      console.log(res.data);
       localStorage.setItem("token", res.data.token)
-      navigate("/dashboard");
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      navigate("/dashboard", {state: {user: res.data.user}});
 
     } catch (error) {
       console.log(error);

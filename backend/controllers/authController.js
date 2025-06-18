@@ -87,8 +87,7 @@ export const login = async (req, res) => {
 // Get Profile
 export const getProfile = async (req, res) => {
     try {
-        const user = await User.findById(req.user.userId).select("-password");
-
+        const user = req.user;
         if(!user) {
             return res.status(404).json({
                 success: false,

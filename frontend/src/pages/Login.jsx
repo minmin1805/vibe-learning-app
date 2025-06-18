@@ -24,8 +24,9 @@ function Login() {
     try {
       const res = await auth.login({email, password});
       localStorage.setItem("token", res.data.token)
-      console.log(res.data);
-      navigate("/dashboard");
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+    
+      navigate("/dashboard", {state: {user: res.data.user}});
     } catch (error) {
       console.log(error);
       alert("Invalid credentials");
