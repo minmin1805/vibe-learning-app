@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 function LandingPage() {
   return (
-    <div>
-      <div>
+    <div className="bg-white p-2" style={{height: "100vh"}}>
+      <div className="bg-gray-100 rounded-2xl p-2 shadow-lg">
         <header className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-purple-500">Vibe Learning</h2>
+          <h2 className="text-2xl font-bold text-blue-800">Vibe Learning</h2>
 
           <div className="flex items-center gap-3">
             <a href="#Features" className="text-gray-400">
@@ -25,69 +25,69 @@ function LandingPage() {
 
           <div className="flex items-center gap-3">
             <Link to="/login">
-              <button className="rounded-md p-3 border-2 border-blue-500">
+              <button className="rounded-md p-3 border-2 border-blue-800 font-semibold hover:bg-blue-100 transition-all hover:cursor-pointer">
                 Login
               </button>
             </Link>
             <Link to="/signup">
-              <button className="bg-purple-500 text-white rounded-md p-3 border-2">
+              <button className="bg-blue-800 text-white rounded-md p-3 border-2 font-semibold hover:bg-blue-900 transition-all hover:cursor-pointer">
                 Signup
               </button>
             </Link>
           </div>
         </header>
 
-        <div className="flex flex-col items-center justify-center p-5 bg-blue-500 text-center">
-          <h1 className="text-4xl font-bold text-white">
+        <div className="flex flex-col items-center justify-center p-8 bg-blue-500 text-center gap-4 w-full">
+          <h1 className="text-4xl font-bold text-white mb-4">
             Transform Any Content Into Interactive Learning
           </h1>
-          <p className="text-white text-lg">
+          <p className="text-white text-lg mb-6 max-w-2xl">
             Turn URLs, PDFs, and YouTube videos into structured lessons with
             AI-powered quizzes and journaling tools. Perfect for self-directed
             learners, busy professionals, and students.
           </p>
-          <a href="#Demo" className="bg-purple-500 p-5 text-white rounded-md">
+          <a href="#Demo" className="bg-blue-800 p-4 text-white rounded-md font-semibold shadow-md hover:bg-blue-900 transition-all">
             Try Free Demo
           </a>
 
           <Link to="/signup">
-            <button className=" text-purple-500 rounded-md p-5 border-2">
+            <button className="text-blue-800 rounded-md p-4 border-2 border-blue-800 font-semibold hover:bg-blue-50 transition-all">
               Signup
             </button>
           </Link>
         </div>
 
         <div className="flex flex-col items-center justify-center p-5">
-          <h2>See Vibe Learning in Action</h2>
-          <p>
+          <h2 className="text-3xl font-bold text-black mb-2">See Vibe Learning in Action</h2>
+          <p className="text-gray-500">
             Watch how we transform any online content into engaging, interactive
             learning experiences
           </p>
 
-          <div className="flex flex-col items-center justify-center p-5 mt-5 bg-gray-400">
-            <h2>Demo Video</h2>
-            <p>URL to AI-Powered Lesson Transformation</p>
-            <button className="bg-purple-500 text-white rounded-md p-3 border-2">
+          <div className="flex flex-col items-center justify-center mt-5 bg-gray-400 rounded-lg shadow-md p-30">
+            <h2 className="text-2xl font-bold text-black mb-2">🎥 Demo Video</h2>
+            <p className="text-gray-500 mb-2">URL to AI-Powered Lesson Transformation</p>
+            <button className="bg-blue-800 text-white rounded-md p-3 border-2 font-semibold hover:bg-blue-900 transition-all">
               Watch Demo
             </button>
           </div>
         </div>
 
-        <div>
-          <h2 className="text-2xl font-bold text-black">
+        <div className="bg-gray-100 mt-5 flex flex-col items-center justify-center">
+          <h2 className="text-3xl font-bold text-black mb-2 mt-5 ">
             Powerful Features for Enhanced Learning
           </h2>
-          <p>
+          <p className="mb-3">
             Our AI-driven platform creates personalized learning experiences
             from any content source
           </p>
 
-          <div className="grid grid-cols-3 gap-5 md:grid-cols-2 lg:grid-cols-3 bg-gray-100 p-5">
-            <div className="flex flex-col items-center justify-center p-5 rounded-lg bg-white">
-              <h2 className="w-12 h-12 rounded-full bg-purple-400 flex items-center justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  p-8">
+            <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-white shadow-md gap-2">
+              <div className="w-12 h-12 rounded-full bg-blue-800 flex items-center justify-center text-white text-xl mb-2">
                 📚
-              </h2>
-              <h2 className="text-2xl font-bold text-black">
+              </div>
+              <h2 className="text-2xl font-bold text-blue-800">
                 Content Ingestion
               </h2>
               <p>
@@ -96,11 +96,11 @@ function LandingPage() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-center p-5 rounded-lg bg-white">
-              <h2 className="w-12 h-12 rounded-full bg-purple-400 flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-white shadow-md gap-2">
+              <div className="w-12 h-12 rounded-full bg-blue-800 flex items-center justify-center text-white text-xl mb-2">
                 🧠
-              </h2>
-              <h2 className="text-2xl font-bold text-black">
+              </div>
+              <h2 className="text-2xl font-bold text-blue-800">
                 AI-Powered Lessons
               </h2>
               <p>
@@ -109,11 +109,11 @@ function LandingPage() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-center p-5 rounded-lg bg-white">
-              <h2 className="w-12 h-12 rounded-full bg-purple-400 flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-white shadow-md gap-2">
+              <div className="w-12 h-12 rounded-full bg-blue-800 flex items-center justify-center text-white text-xl mb-2">
                 ❓
-              </h2>
-              <h2 className="text-2xl font-bold text-black">
+              </div>
+              <h2 className="text-2xl font-bold text-blue-800">
                 Interactive Quizzes
               </h2>
               <p>
@@ -122,11 +122,11 @@ function LandingPage() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-center p-5 rounded-lg bg-white">
-              <h2 className="w-12 h-12 rounded-full bg-purple-400 flex items-center justify-center">
+            <div className="flex flex-col items-center justify-center p-6 rounded-lg bg-white shadow-md gap-2">
+              <div className="w-12 h-12 rounded-full bg-blue-800 flex items-center justify-center text-white text-xl mb-2">
                 📝
-              </h2>
-              <h2 className="text-2xl font-bold text-black">
+              </div>
+              <h2 className="text-2xl font-bold text-blue-800">
                 Learning Journal
               </h2>
               <p>
@@ -137,8 +137,8 @@ function LandingPage() {
           </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center p-5 mt-5">
-            <h2 className="text-2xl font-bold text-black">
+          <div className="flex flex-col items-center justify-center p-8 mt-8 gap-2">
+            <h2 className="text-3xl font-bold text-black">
               What Our Users Say
             </h2>
             <p className="mb-5">
@@ -146,68 +146,65 @@ function LandingPage() {
               with Vibe Learning
             </p>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5">
-              <div className=" p-5 rounded-lg bg-gray-100 border-2 border-purple-500">
-                <p className="text-gray-500 ">
-                  "Vibe Learning has revolutionized how I consume educational
-                  content. I can turn any article or video into a structured
-                  learning experience in minutes!"
-                </p>
-                <p className="text-purple-500 font-bold text-left">
-                  - Sarah M., Graduate Student
-                </p>
-              </div>
-
-              <div className=" p-5 rounded-lg bg-gray-100 border-2 border-purple-500">
-                <p className="text-gray-500 ">
-                  "The AI-generated reflection prompts in the learning journal
-                  have completely changed how I process and remember new
-                  information. It's like having a personal tutor!"
-                </p>
-                <p className="text-purple-500 font-bold text-left">
-                  - Maria L., Self-Directed Learner
-                </p>
-              </div>
-
-              <div className=" p-5 rounded-lg bg-gray-100 border-2 border-purple-500">
-                <p className="text-gray-500 ">
-                  "As a busy professional, I love how I can quickly transform
-                  industry articles into interactive lessons during my commute.
-                  The quizzes help me retain everything I learn." "
-                </p>
-                <p className="text-purple-500 font-bold text-left">
-                  - David K., Marketing Manager
-                </p>
-              </div>
-            </div>
-            </div>
-
-            <div className="flex flex-col items-center justify-center p-5 mt-5 bg-gray-700 ">
-              <h2 className="text-3xl text-white font-bold">Ready to Transform Your Learning?</h2>
-
-              <p className="text-white text-lg pt-3">
-                Join thousands of learners who have discovered the power of
-                AI-driven education
+            <div className="p-6 rounded-lg bg-gray-100 border-2 border-blue-800 shadow-md mb-4">
+              <p className="text-blue-800 font-bold text-left">
+                "Vibe Learning has revolutionized how I consume educational
+                content. I can turn any article or video into a structured
+                learning experience in minutes!"
               </p>
-              <button className="bg-purple-500 text-white rounded-md p-3 text-lg mt-3">
-                Start Learning Today
-              </button>
-              <button className=" text-purple-500 rounded-md p-3 border-2 text-lg border-purple-500 mt-3">
-                Try Free Demo
-              </button>
+              <p className="text-blue-800 font-bold text-left">
+                - Sarah M., Graduate Student
+              </p>
             </div>
 
-          <div className="bg-gray-900 grid grid-cols-2 xl:grid-cols-3 p-3">
+            <div className="p-6 rounded-lg bg-gray-100 border-2 border-blue-800 shadow-md mb-4">
+              <p className="text-blue-800 font-bold text-left">
+                "The AI-generated reflection prompts in the learning journal
+                have completely changed how I process and remember new
+                information. It's like having a personal tutor!"
+              </p>
+              <p className="text-blue-800 font-bold text-left">
+                - Maria L., Self-Directed Learner
+              </p>
+            </div>
 
+            <div className="p-6 rounded-lg bg-gray-100 border-2 border-blue-800 shadow-md mb-4">
+              <p className="text-blue-800 font-bold text-left">
+                "As a busy professional, I love how I can quickly transform
+                industry articles into interactive lessons during my commute.
+                The quizzes help me retain everything I learn." "
+              </p>
+              <p className="text-blue-800 font-bold text-left">
+                - David K., Marketing Manager
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center justify-center p-8 mt-8 bg-gray-700 gap-2 rounded-lg shadow-md">
+            <h2 className="text-3xl text-white font-bold mb-2">Ready to Transform Your Learning?</h2>
+
+            <p className="text-white text-lg pt-3">
+              Join thousands of learners who have discovered the power of
+              AI-driven education
+            </p>
+            <button className="bg-blue-800 text-white rounded-md p-3 text-lg mt-3 font-semibold hover:bg-blue-900 transition-all">
+              Start Learning Today
+            </button>
+            <button className="text-blue-800 rounded-md p-3 border-2 text-lg border-blue-800 mt-3 font-semibold hover:bg-blue-50 transition-all">
+              Try Free Demo
+            </button>
+          </div>
+
+          <div className="bg-gray-900 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 p-6 gap-6 rounded-lg mt-8">
             <div>
-              <h2 className="text-purple-500 font-bold text-xl mb-3">Vibe Learning</h2>
+              <h2 className="text-blue-800 font-bold text-xl mb-3">Vibe Learning</h2>
               <p className="text-white">Transform any content into interactive learning experiences with the power of AI.
 
 </p>
             </div>
 
             <div>
-              <h2 className="text-purple-500 font-bold text-xl mb-3">Platform</h2>
+              <h2 className="text-blue-800 font-bold text-xl mb-3">Platform</h2>
               <ul className="text-white">
                 <li>Dashboard</li>
                 <li>Upload Content</li>
@@ -217,7 +214,7 @@ function LandingPage() {
             </div>
 
             <div>
-              <h2 className="text-purple-500 font-bold text-xl mb-3">Support</h2>
+              <h2 className="text-blue-800 font-bold text-xl mb-3">Support</h2>
               <ul className="text-white">
                 <li className="mb-2">FAQ</li>
                 <li className="mb-2">Contact Us</li>
@@ -227,7 +224,7 @@ function LandingPage() {
             </div>
 
             <div>
-              <h2 className="text-purple-500 font-bold text-xl mb-3">Contact</h2>
+              <h2 className="text-blue-800 font-bold text-xl mb-3">Contact</h2>
               <p className="text-white mb-2">info@vibelearning.com</p>
               <p className="text-white mb-2">+1 (123) 456-7890</p>
               <p className="text-white mb-2">123 Main St, Anytown, USA</p>

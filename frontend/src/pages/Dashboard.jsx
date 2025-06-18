@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TopNavBar from "../components/TopNavBar";
 import { auth } from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -55,26 +55,33 @@ function Dashboard() {
           </div>
         </div>
 
+        
         <div className="flex flex-col mt-8 bg-white p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-bold text-blue-800 mb-4">Quick Upload</h2>
+
+          
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pb-3">
+
+            <Link to="/upload">
             <div className="flex flex-col items-center justify-center border-1 p-3 rounded-2xl shadow-md">
               <h2>🔗</h2>
               <h2>Link</h2>
               <p>Upload any web article into a lesson</p>
-            </div>
+            </div></Link>
 
+            <Link to="/upload">
             <div className="flex flex-col items-center justify-center border-1 p-3 rounded-2xl shadow-md">
               <h2>📑</h2>
               <h2>PDF</h2>
               <p>Upload documents for AI analysis</p>
-            </div>
+            </div></Link>
 
+            <Link to="/upload">
             <div className="flex flex-col items-center justify-center border-1 p-3 rounded-2xl shadow-md">
               <h2>🎥</h2>
               <h2>Youtube</h2>
               <p>Learn from video content</p>
-            </div>
+            </div></Link>
           </div>
         </div>
 
