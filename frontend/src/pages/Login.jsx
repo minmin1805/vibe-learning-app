@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -8,15 +10,25 @@ function Login() {
 
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(email, password);
 
     if (!email || !password) {
       alert("Please fill in all fields");
       return;
+    }
+
+    try {
+      const res = await auth.login({email, password});
+      localStorage.setItem("token", res.data.token)
+      console.log(res.data);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+      alert("Invalid credentials");
     }
     
   }

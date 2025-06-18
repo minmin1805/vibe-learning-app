@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
 
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -13,13 +15,24 @@ function Signup() {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(name, email, password);
 
     if (!name || !email || !password) {
       alert("Please fill in all fields");
       return;
+    }
+
+    try {
+      const res = await auth.signup({name, email, password});
+      console.log(res.data);
+      localStorage.setItem("token", res.data.token)
+      navigate("/dashboard");
+
+    } catch (error) {
+      console.log(error);
+      alert("Error signing up");
     }
     
   }
