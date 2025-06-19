@@ -125,7 +125,7 @@ export const processPdfContent = async (req, res) => {
       status: content.status,
       message: "PDF processed successfully"
     });
-    
+
   } catch (error) {
     console.error("PDF processing error:", error);
     res.status(500).json({ success: false, message: error.message });
@@ -133,8 +133,18 @@ export const processPdfContent = async (req, res) => {
 };
 
 export const processYoutubeContent = async (req, res) => {
+
     try {
         const { youtubeUrl } = req.body;
+
+        if(!youtubeUrl) {
+            return res.status(400).json({
+                success: false,
+                message: "Youtube URL is required",
+            });
+        }
+
+        
     } catch (error) {
         res.status(500).json({
             success: false,
