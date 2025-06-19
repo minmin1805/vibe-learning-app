@@ -8,11 +8,11 @@ function UploadPage() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const [selectedUploadType, setSelectedUploadType] = useState("URL");
+  const [selectedUploadType, setSelectedUploadType] = useState(null);
 
-  const [url, setUrl] = useState(null);
+  const [url, setUrl] = useState("");
   const [pdf, setPdf] = useState(null);
-  const [youtubeUrl, setYoutubeUrl] = useState(null);
+  const [youtubeUrl, setYoutubeUrl] = useState("");
 
   useEffect(() => {
     async function fetchProfile() {
@@ -30,10 +30,16 @@ function UploadPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(url, pdf, youtubeUrl);
-    setUrl(null);
-    setPdf(null);
-    setYoutubeUrl(null);
+    if (selectedUploadType === "URL") {
+      console.log("URL:", url);
+      setUrl("");
+    } else if (selectedUploadType === "PDF") {
+      console.log("PDF:", pdf);
+      setPdf(null);
+    } else if (selectedUploadType === "Youtube") {
+      console.log("Youtube URL:", youtubeUrl);
+      setYoutubeUrl("");
+    }
   };
 
   return (
@@ -78,7 +84,7 @@ function UploadPage() {
                 </label>
                 <input
                   onChange={(e) => setUrl(e.target.value)}
-                  type="text"
+                  type="url"
                   placeholder="Enter URL"
                   className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2"
                 ></input>
@@ -119,7 +125,7 @@ function UploadPage() {
                 </label>
                 <input
                   onChange={(e) => setYoutubeUrl(e.target.value)}
-                  type="text"
+                  type="url"
                   placeholder="Enter Youtube URL"
                   className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2"
                 ></input>
