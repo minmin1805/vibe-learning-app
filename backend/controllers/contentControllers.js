@@ -1,6 +1,8 @@
 import Content from "../models/Content.js";
 import * as cheerio from 'cheerio';
 import axios from "axios";
+import pdfParse from "pdf-parse/lib/pdf-parse.js";
+
 
 // Process url content
 export const processUrlContent = async (req, res) => {
@@ -78,14 +80,57 @@ export const processUrlContent = async (req, res) => {
 
 export const processPdfContent = async (req, res) => {
     try {
-        const { pdf } = req.body;
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Error processing pdf content",
-        });
-    }
-}
+        const { file } = req;
+
+        if(!file) {
+            return res.status(400).json({
+                success: false,
+                message: "File is required",
+            });
+        }
+
+    // Extract text using pdf-parse
+    const data = await pdfParse(req.file.buffer);
+    const extractedText = data.text;
+    const extractedTitle = req.file.originalname.replace(/\.pdf$/i, "");
+    const wordCount = extractedText.split(/\s+/).length;
+
+    const metadata = {
+      fileSize: req.file.size,
+      wordCount,
+      estimatedReadTime: Math.ceil(wordCount / 200),
+      numPages: data.numpages,
+      info: data.info,
+      version: data.version
+    };
+
+    const content = new Content({
+      userId: req.user.id,
+      type: "pdf",
+      originalSource: req.file.originalname,
+      title: extractedTitle,
+      extractedText,
+      metadata,
+      processedAt: new Date(),
+      status: "completed",
+      createdAt: new Date()
+    });
+    await content.save();
+
+    res.json({
+      success: true,
+      contentId: content._id,
+      title: content.title,
+      type: content.type,
+      status: content.status,
+      message: "PDF processed successfully"
+    });
+    
+  } catch (error) {
+    console.error("PDF processing error:", error);
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 export const processYoutubeContent = async (req, res) => {
     try {
