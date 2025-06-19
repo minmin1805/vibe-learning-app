@@ -8,10 +8,10 @@ const contentSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ["URL", "PDF", "Youtube"],
+        enum: ["url", "pdf", "youtube"],
         required: true
     },
-    originalUrl: {
+    originalSource: {
         type: String,
         required: true,
     },

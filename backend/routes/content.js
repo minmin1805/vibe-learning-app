@@ -1,16 +1,17 @@
 import express from "express";
 import { processUrlContent, processPdfContent, processYoutubeContent } from "../controllers/contentControllers.js";
+import { verifyToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 // Process url content
-router.post("/process-url", processUrlContent);
+router.post("/process-url", verifyToken, processUrlContent);
 
 // Process pdf content
-router.post("/process-pdf", processPdfContent);
+router.post("/process-pdf", verifyToken, processPdfContent);
 
 // Process youtube content
-router.post("/process-youtube", processYoutubeContent);
+router.post("/process-youtube", verifyToken, processYoutubeContent);
 
 
 export default router;

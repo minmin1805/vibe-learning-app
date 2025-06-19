@@ -16,7 +16,7 @@ export const processUrlContent = async (req, res) => {
         
         // get the html content of the url
         const htmlContent = await axios.get(url);
-        console.log(htmlContent.data);
+        // console.log(htmlContent.data);
 
         /// load the html content into cheerio
         const $ = cheerio.load(htmlContent.data);
@@ -25,17 +25,11 @@ export const processUrlContent = async (req, res) => {
         const extractedTitle = $("title").text();
 
         // extract the heading + all the paragraphs
-        const heading = $("h1, h2, h3, h4, h5, h6").map((eachElement, index) => {
-            return $(eachElement).text()
-        }).get();
-
-        // extract the paragraphs
-        const paragraphs = $("p").map((eachElement, index) => {
-            return $(eachElement).text()
-        }).get();
-
-        // add all the extracted text to a single variable
-        const extractedText = [...heading, ...paragraphs].join("\n\n");
+        let extractedText = '';
+        $('h1, h2, h3, p').each((i, el) => {
+            extractedText += $(el).text() + '\n\n'
+        });
+        // console.log(extractedText);
 
         // extract the metadata
         const extractedMetadata = {
@@ -48,6 +42,8 @@ export const processUrlContent = async (req, res) => {
 
         }
 
+        console.log(req.user);
+
         // save the content to the database
         const newContent = new Content({
             userId: req.user.id,
@@ -59,6 +55,8 @@ export const processUrlContent = async (req, res) => {
             status: "completed",
             processedAt: new Date(),
         })
+
+        // console.log(newContent);
 
         await newContent.save();
 
