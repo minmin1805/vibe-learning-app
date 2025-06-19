@@ -34,8 +34,7 @@ function UploadPage() {
     setUrl(null);
     setPdf(null);
     setYoutubeUrl(null);
-  }
-
+  };
 
   return (
     <div>
@@ -48,52 +47,91 @@ function UploadPage() {
         <div>
           <h1 className="text-2xl font-bold text-black">Upload Page</h1>
           <div className="inline-block mt-3">
-            <button onClick={() => setSelectedUploadType("URL")} className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all mr-2">
+            <button
+              onClick={() => setSelectedUploadType("URL")}
+              className={`bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all mr-2 ${selectedUploadType == "URL" ? "bg-blue-800" : ""}`}
+            >
               URL
             </button>
-            <button onClick={() => setSelectedUploadType("PDF")} className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all mr-2">
+            <button
+              onClick={() => setSelectedUploadType("PDF")}
+              className={`bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all mr-2 ${selectedUploadType == "PDF" ? "bg-blue-800" : ""}`}
+            >
               PDF
             </button>
-            <button  onClick={() => setSelectedUploadType("Youtube")} className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all">
+            <button
+              onClick={() => setSelectedUploadType("Youtube")}
+              className={`bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all ${selectedUploadType == "Youtube" ? "bg-blue-800" : ""}`}
+            >
               Youtube
             </button>
           </div>
 
-
-            <form onSubmit={handleSubmit} className="flex flex-col justify-center mt-5 bg-white p-5 rounded-lg shadow-md">
-                {selectedUploadType == "URL" && (
-                    <div>
-                        <label className="text-sm font-bold text-gray-500">Paste a URL</label>
-                        <input onChange={(e) => setUrl(e.target.value)} type="text" placeholder="Enter URL" className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2"></input>
-                        <button type="submit" className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200">
-                            Upload & Process
-                        </button>
-                    </div>
-                )}
-                {selectedUploadType == "PDF" && (
-                    <div>
-                        <label className="text-sm font-bold text-gray-500">Upload a PDF</label>
-                        <div className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2 border-dashed bg-gray-50 hover:bg-gray-100 transition-all cursor-pointer">
-                          <input onChange={(e) => setPdf(e.target.files[0])} type="file" className="hidden" id="pdf-upload" accept=".pdf" />
-                          <label htmlFor="pdf-upload" className="flex flex-col items-center justify-center cursor-pointer">
-                            <div className="text-sm">Choose File</div>
-                          </label>
-                        </div>
-                        <button type="submit" className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200">
-                            Upload & Process
-                        </button>
-                    </div>
-                )}
-                {selectedUploadType == "Youtube" && (
-                    <div>
-                        <label className="text-sm font-bold text-gray-500">Paste a Youtube URL</label>
-                        <input onChange={(e) => setYoutubeUrl(e.target.value)} type="text" placeholder="Enter Youtube URL" className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2"></input>
-                        <button type="submit" className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200">
-                            Upload & Process
-                        </button>
-                    </div>
-                )}
-            </form>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col justify-center mt-5 bg-white p-5 rounded-lg shadow-md min-w-[400px]"
+          >
+            {selectedUploadType == "URL" && (
+              <div>
+                <label className="text-sm font-bold text-gray-500">
+                  Paste a URL
+                </label>
+                <input
+                  onChange={(e) => setUrl(e.target.value)}
+                  type="text"
+                  placeholder="Enter URL"
+                  className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2"
+                ></input>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
+                >
+                  Upload & Process
+                </button>
+              </div>
+            )}
+            {selectedUploadType == "PDF" && (
+              <div>
+                <label className="text-sm font-bold text-gray-500">
+                  Upload a PDF
+                </label>
+                <div className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2 border-dashed bg-gray-50 hover:bg-gray-100 transition-all cursor-pointer">
+                  <input
+                    onChange={(e) => setPdf(e.target.files[0])}
+                    type="file"
+                    id="pdf-upload"
+                    accept=".pdf"
+                
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
+                >
+                  Upload & Process
+                </button>
+              </div>
+            )}
+            {selectedUploadType == "Youtube" && (
+              <div>
+                <label className="text-sm font-bold text-gray-500">
+                  Paste a Youtube URL
+                </label>
+                <input
+                  onChange={(e) => setYoutubeUrl(e.target.value)}
+                  type="text"
+                  placeholder="Enter Youtube URL"
+                  className="w-full p-2 border border-gray-300 rounded-md mb-3 mt-2"
+                ></input>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
+                >
+                  Upload & Process
+                </button>
+              </div>
+            )}
+          </form>
         </div>
       </div>
     </div>
