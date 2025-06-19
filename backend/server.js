@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
-
+import contentRoutes from "./routes/content.js";
 
 dotenv.config();
 const app = express();
@@ -32,7 +32,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
-
+app.use("/api/content", contentRoutes);
 
 // Serve upload folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
