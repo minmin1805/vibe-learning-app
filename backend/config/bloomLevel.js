@@ -1,3 +1,398 @@
+// JSON Schemas and Prompts for Bloom's Taxonomy Levels
+
+export const bloomLevelSchemas = {
+  remember: {
+    type: "object",
+    properties: {
+      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      openingQuestion: { type: "string" },
+      shortAnswer: { type: "string" },
+      keyDefinition: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          definition: { type: "string" }
+        },
+        required: ["title", "definition"]
+      },
+      coreComponents: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            term: { type: "string" },
+            definition: { type: "string" }
+          },
+          required: ["term", "definition"]
+        }
+      },
+      knowledgeCheck: {
+        type: "object",
+        properties: {
+          question: { type: "string" },
+          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+        },
+        required: ["question", "options", "correctAnswerIndex"]
+      },
+      dragAndDrop: {
+        type: "object",
+        properties: {
+          terms: { type: "array", items: { type: "string" } },
+          definitions: { type: "array", items: { type: "string" } },
+          correctMatches: { type: "object", additionalProperties: { type: "string" } }
+        },
+        required: ["terms", "definitions", "correctMatches"]
+      },
+      deepDive: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            title: { type: "string" },
+            content: { type: "string" }
+          },
+          required: ["title", "content"]
+        }
+      }
+    },
+    required: [
+      "learningObjectives",
+      "openingQuestion",
+      "shortAnswer",
+      "keyDefinition",
+      "coreComponents",
+      "knowledgeCheck",
+      "dragAndDrop",
+      "deepDive"
+    ]
+  },
+
+  understand: {
+    type: "object",
+    properties: {
+      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      conceptExplanation: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          explanation: { type: "string" }
+        },
+        required: ["title", "explanation"]
+      },
+      examples: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            scenario: { type: "string" },
+            explanation: { type: "string" }
+          },
+          required: ["scenario", "explanation"]
+        }
+      },
+      interactiveComparison: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          items: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                concept: { type: "string" },
+                characteristics: { type: "array", items: { type: "string" } }
+              },
+              required: ["concept", "characteristics"]
+            }
+          }
+        },
+        required: ["title", "items"]
+      },
+      understandingCheck: {
+        type: "object",
+        properties: {
+          question: { type: "string" },
+          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+        },
+        required: ["question", "options", "correctAnswerIndex"]
+      }
+    },
+    required: [
+      "learningObjectives",
+      "conceptExplanation",
+      "examples",
+      "interactiveComparison",
+      "understandingCheck"
+    ]
+  },
+
+  apply: {
+    type: "object",
+    properties: {
+      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      sectionContent: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          content: { type: "string" }
+        },
+        required: ["title", "content"]
+      },
+      problemSolvingChallenge: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            scenario: { type: "string" },
+            approachOptions: { type: "array", items: { type: "string" } },
+            justificationPrompt: { type: "string" }
+          },
+          required: ["scenario", "approachOptions", "justificationPrompt"]
+        }
+      },
+      workflowImplementation: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          steps: { type: "array", items: { type: "string" } },
+          correctOrder: { type: "array", items: { type: "number" } }
+        },
+        required: ["title", "steps", "correctOrder"]
+      },
+      applicationChallenge: {
+        type: "object",
+        properties: {
+          question: { type: "string" },
+          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+        },
+        required: ["question", "options", "correctAnswerIndex"]
+      }
+    },
+    required: [
+      "learningObjectives",
+      "sectionContent",
+      "problemSolvingChallenge",
+      "workflowImplementation",
+      "applicationChallenge"
+    ]
+  },
+
+  analyze: {
+    type: "object",
+    properties: {
+      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      sectionContent: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          content: { type: "string" }
+        },
+        required: ["title", "content"]
+      },
+      algorithmAnalysis: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          characteristics: { type: "array", items: { type: "string" } },
+          algorithms: { type: "array", items: { type: "string" } },
+          correctMatches: { type: "object", additionalProperties: { type: "array", items: { type: "string" } } }
+        },
+        required: ["title", "characteristics", "algorithms", "correctMatches"]
+      },
+      analysisExercise: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            scenario: { type: "string" },
+            reasonOptions: { type: "array", items: { type: "string" } },
+            analysisPrompt: { type: "string" }
+          },
+          required: ["scenario", "reasonOptions", "analysisPrompt"]
+        }
+      },
+      criticalAnalysis: {
+        type: "object",
+        properties: {
+          question: { type: "string" },
+          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+        },
+        required: ["question", "options", "correctAnswerIndex"]
+      }
+    },
+    required: [
+      "learningObjectives",
+      "sectionContent",
+      "algorithmAnalysis",
+      "analysisExercise",
+      "criticalAnalysis"
+    ]
+  },
+
+  evaluate: {
+    type: "object",
+    properties: {
+      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      sectionContent: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          content: { type: "string" }
+        },
+        required: ["title", "content"]
+      },
+      evaluationFramework: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          criteria: { type: "array", items: { type: "string" } },
+          context: { type: "string" }
+        },
+        required: ["title", "criteria", "context"]
+      },
+      businessContextEvaluation: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            scenario: { type: "string" },
+            approachOptions: { type: "array", items: { type: "string" } },
+            justificationPrompt: { type: "string" }
+          },
+          required: ["scenario", "approachOptions", "justificationPrompt"]
+        }
+      },
+      evaluationChallenge: {
+        type: "object",
+        properties: {
+          question: { type: "string" },
+          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 },
+          feedback: { type: "string" }
+        },
+        required: ["question", "options", "correctAnswerIndex", "feedback"]
+      },
+      criticalEvaluation: {
+        type: "object",
+        properties: {
+          scenario: { type: "string" },
+          concernOptions: { type: "array", items: { type: "string" } },
+          solutionPrompt: { type: "string" },
+          metricsPrompt: { type: "string" },
+          feedback: { type: "string" }
+        },
+        required: ["scenario", "concernOptions", "solutionPrompt", "metricsPrompt", "feedback"]
+      }
+    },
+    required: [
+      "learningObjectives",
+      "sectionContent",
+      "evaluationFramework",
+      "businessContextEvaluation",
+      "evaluationChallenge",
+      "criticalEvaluation"
+    ]
+  },
+
+  create: {
+    type: "object",
+    properties: {
+      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      sectionContent: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          content: { type: "string" }
+        },
+        required: ["title", "content"]
+      },
+      creativeChallenge: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          problemDomains: { type: "array", items: { type: "string" } }
+        },
+        required: ["title", "problemDomains"]
+      },
+      solutionBlueprint: {
+        type: "object",
+        properties: {
+          sections: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                title: { type: "string" },
+                prompt: { type: "string" }
+              },
+              required: ["title", "prompt"]
+            }
+          }
+        },
+        required: ["sections"]
+      },
+      implementationRoadmap: {
+        type: "object",
+        properties: {
+          phases: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                title: { type: "string" },
+                steps: { type: "array", items: { type: "string" } }
+              },
+              required: ["title", "steps"]
+            }
+          }
+        },
+        required: ["phases"]
+      },
+      synthesisChallenge: {
+        type: "object",
+        properties: {
+          question: { type: "string" },
+          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+        },
+        required: ["question", "options", "correctAnswerIndex"]
+      },
+      solutionPresentation: {
+        type: "object",
+        properties: {
+          sections: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                title: { type: "string" },
+                prompt: { type: "string" },
+                timeLimit: { type: "string" }
+              },
+              required: ["title", "prompt", "timeLimit"]
+            }
+          }
+        },
+        required: ["sections"]
+      }
+    },
+    required: [
+      "learningObjectives",
+      "sectionContent",
+      "creativeChallenge",
+      "solutionBlueprint",
+      "implementationRoadmap",
+      "synthesisChallenge",
+      "solutionPresentation"
+    ]
+  }
+};
+
+
 export const bloomLevelPrompts = {
     remember: `Create the "Remember" section of a lesson following Bloom's Taxonomy.
     Return ONLY a JSON object matching this schema:
