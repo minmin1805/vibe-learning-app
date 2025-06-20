@@ -13,76 +13,137 @@ dotenv.config();
 
 const router = express.Router();
 
-
 const openai = new OpenAI({
-    apiKey: process.env['OPENAI_API_KEY'],
-  });
+  apiKey: process.env["OPENAI_API_KEY"],
+});
 
 const ajv = new Ajv();
 
-
 router.post("/test-bloom-level", verifyToken, async (req, res) => {
-    try {
-      const { level, contentId } = req.body;
-  
-      if (!level || !contentId) {
-        return res.status(400).json({ 
-          message: 'Level and contentId are required' 
-        });
-      }
+  try {
+    const { level, contentId } = req.body;
 
-      const foundContent = await Content.findById(contentId);
-
-      if(!foundContent) {
-        return res.status(404).json({
-          message: 'Content not found'
-        })
-      }
-  
-      if (!bloomLevelPrompts[level]) {
-        return res.status(400).json({ 
-          message: 'Invalid Bloom\'s level',
-          validLevels: Object.keys(bloomLevelPrompts)
-        });
-      }
-  
-      // Construct the prompt
-      const prompt = `${bloomLevelPrompts[level]}\n\nContent: ${foundContent.extractedText}`;
-  
-      // Generate content using OpenAI
-      const completion = await openai.chat.completions.create({
-        messages: [{ role: 'user', content: prompt }],
-        model: 'gpt-4-turbo-preview',
-        response_format: { type: 'json_object' }
-      });
-  
-      // Parse the response
-      const generatedContent = JSON.parse(completion.choices[0].message.content);
-  
-      // Validate against schema
-      const validate = ajv.compile(bloomLevelSchemas[level]);
-      const isValid = validate(generatedContent);
-  
-      if (!isValid) {
-        return res.status(400).json({
-          message: 'Generated content does not match schema',
-          errors: validate.errors
-        });
-      }
-  
-      res.json({
-        message: 'Content generated successfully',
-        level,
-        content: generatedContent
-      });
-  
-    } catch (error) {
-      console.error('Error generating content:', error);
-      res.status(500).json({ 
-        message: 'Error generating content',
-        error: error.message 
+    if (!level || !contentId) {
+      return res.status(400).json({
+        message: "Level and contentId are required",
       });
     }
-  });
+
+    const foundContent = await Content.findById(contentId);
+
+    if (!foundContent) {
+      return res.status(404).json({
+        message: "Content not found",
+      });
+    }
+
+    if (!bloomLevelPrompts[level]) {
+      return res.status(400).json({
+        message: "Invalid Bloom's level",
+        validLevels: Object.keys(bloomLevelPrompts),
+      });
+    }
+
+    // Construct the prompt
+    const prompt = `${bloomLevelPrompts[level]}\n\nContent: ${foundContent.extractedText}`;
+
+    // Generate content using OpenAI
+    const completion = await openai.chat.completions.create({
+      messages: [{ role: "user", content: prompt }],
+      model: "gpt-4-turbo-preview",
+      response_format: { type: "json_object" },
+    });
+
+    // Parse the response
+    const generatedContent = JSON.parse(completion.choices[0].message.content);
+
+    // Validate against schema
+    const validate = ajv.compile(bloomLevelSchemas[level]);
+    const isValid = validate(generatedContent);
+
+    if (!isValid) {
+      return res.status(400).json({
+        message: "Generated content does not match schema",
+        errors: validate.errors,
+      });
+    }
+
+    res.json({
+      message: "Content generated successfully",
+      level,
+      content: generatedContent,
+    });
+  } catch (error) {
+    console.error("Error generating content:", error);
+    res.status(500).json({
+      message: "Error generating content",
+      error: error.message,
+    });
+  }
+});
+
+// Test endpoint to generate content for all Bloom's levels
+router.post("/test-all-levels", verifyToken, async (req, res) => {
+  try {
+    const { contentId } = req.body;
+
+    if (!contentId) {
+      return res.status(400).json({
+        message: "Content is required",
+      });
+    }
+
+    const results = {};
+    const errors = {};
+
+    const foundContent = await Content.findById(contentId);
+
+    if (!foundContent) {
+      return res.status(404).json({
+        message: "Content not found",
+      });
+    }
+    // Generate content for each level
+    for (const level of Object.keys(bloomLevelPrompts)) {
+      try {
+        const prompt = `${bloomLevelPrompts[level]}\n\nContent: ${foundContent.extractedText}`;
+
+        const completion = await openai.chat.completions.create({
+          messages: [{ role: "user", content: prompt }],
+          model: "gpt-4-turbo-preview",
+          response_format: { type: "json_object" },
+        });
+
+        const generatedContent = JSON.parse(
+          completion.choices[0].message.content
+        );
+
+        // Validate against schema
+        const validate = ajv.compile(bloomLevelSchemas[level]);
+        const isValid = validate(generatedContent);
+
+        if (isValid) {
+          results[level] = generatedContent;
+        } else {
+          errors[level] = validate.errors;
+        }
+      } catch (error) {
+        errors[level] = error.message;
+      }
+    }
+
+    res.json({
+      message: "Content generation completed",
+      results,
+      errors: Object.keys(errors).length > 0 ? errors : undefined,
+    });
+  } catch (error) {
+    console.error("Error generating content:", error);
+    res.status(500).json({
+      message: "Error generating content",
+      error: error.message,
+    });
+  }
+});
 
 export default router;

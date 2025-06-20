@@ -55,4 +55,10 @@ export const content = {
   processYoutube: async (youtubeUrl) => api.post("/content/process-youtube", { youtubeUrl }),
 }
 
+export const lesson = {
+  generateLessons: async (contentId) => await api.post("/lesson/generate", { contentId }),
+  getLessons: async () => await api.get("/lesson"),
+  getLessonById: async (id) => await api.get(`/lesson/${id}`),
+}
+
 export default api;

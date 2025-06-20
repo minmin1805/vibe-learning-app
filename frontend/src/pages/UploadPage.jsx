@@ -4,7 +4,7 @@ import { useState } from "react";
 import TopNavBar from "../components/TopNavBar";
 import { auth } from "../services/api";
 import { content } from "../services/api";
-
+import { lesson } from "../services/api";
 
 function UploadPage() {
   const [user, setUser] = useState(null);
@@ -41,26 +41,62 @@ function UploadPage() {
       if (selectedUploadType === "URL") {
         console.log("URL:", url);
         const res = await content.processUrl(url);
-        setUrl("");
-        setMessage("Upload successful!");
-        setMessageType("success");
         console.log("URL response:", res);
+
+        // Robustly get the content ID from the response, which is nested in the 'content' object.
+        const contentId = res.data.content?._id || res.data.content?.contentId;
+        
+        if (contentId) {
+          console.log("Content ID:", contentId);
+          await lesson.generateLessons(contentId);
+
+          setUrl("");
+          setMessage("Upload successful, please go to the lessons page to view your lesson!");
+          setMessageType("success");
+        } else {
+          throw new Error("Content ID not found in response.");
+        }
+
       } else if (selectedUploadType === "PDF") {
         console.log("PDF:", pdf);
         const res = await content.processPdf(pdf);
-        setPdf(null);
-        setMessage("Upload successful!");
-        setMessageType("success");
         console.log("PDF response:", res);
+        
+        // Robustly get the content ID from the response, which is nested in the 'content' object.
+        const contentId = res.data.content?._id || res.data.content?.contentId;
+
+        if (contentId) {
+          console.log("Content ID:", contentId);
+          await lesson.generateLessons(contentId);
+
+          setPdf(null);
+          setMessage("Upload successful, please go to the lessons page to view your lesson!");
+          setMessageType("success");
+        } else {
+          throw new Error("Content ID not found in response.");
+        }
+
       } else if (selectedUploadType === "Youtube") {
         console.log("Youtube URL:", youtubeUrl);
         const res = await content.processYoutube(youtubeUrl);
-        setYoutubeUrl("");
-        setMessage("Upload successful!");
-        setMessageType("success");
         console.log("Youtube response:", res);
+
+        // Robustly get the content ID from the response, which is nested in the 'content' object.
+        const contentId = res.data.content?._id || res.data.content?.contentId;
+
+        if (contentId) {
+          console.log("Content ID:", contentId);
+          await lesson.generateLessons(contentId);
+          
+          setYoutubeUrl("");
+          setMessage("Upload successful, please go to the lessons page to view your lesson!");
+          setMessageType("success");
+        } else {
+          throw new Error("Content ID not found in response.");
+        }
       }
     } catch (error) {
+      console.error(error);
       setMessage("Upload failed. Please try again.");
       setMessageType("error");
     }

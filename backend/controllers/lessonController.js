@@ -53,8 +53,8 @@ export const generateLesson = async (req, res) => {
             userId: req.user._id,
             contentId: foundContent._id,
             title: foundContent.title,
-            learningObjectives: levelLessons[0].content.learningObjectives, // Use Remember level's objectives
-            keyConcepts: levelLessons[0].content.coreComponents, // Use Remember level's core components
+            learningObjectives: JSON.parse(levelLessons[0].content).learningObjectives, // Use Remember level's objectives
+            keyConcepts: JSON.parse(levelLessons[0].content).coreComponents, // Use Remember level's core components
             sections: levelLessons,
             summary: foundContent.metadata.description || 'A comprehensive lesson covering key concepts and applications.',
             status: 'draft'
