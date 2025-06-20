@@ -43,16 +43,16 @@ function UploadPage() {
         const res = await content.processUrl(url);
         console.log("URL response:", res);
 
-        // Robustly get the content ID from the response, which is nested in the 'content' object.
-        const contentId = res.data.content?._id || res.data.content?.contentId;
+        const contentId = res.data.content?._id || res.data.contentId;
         
         if (contentId) {
           console.log("Content ID:", contentId);
+          setMessage("Upload successful, please go to the lessons page to view your lesson!");
+          setMessageType("success");
           await lesson.generateLessons(contentId);
 
           setUrl("");
-          setMessage("Upload successful, please go to the lessons page to view your lesson!");
-          setMessageType("success");
+
         } else {
           throw new Error("Content ID not found in response.");
         }
@@ -62,16 +62,16 @@ function UploadPage() {
         const res = await content.processPdf(pdf);
         console.log("PDF response:", res);
         
-        // Robustly get the content ID from the response, which is nested in the 'content' object.
-        const contentId = res.data.content?._id || res.data.content?.contentId;
-
+        const contentId = res.data.content?._id || res.data.contentId;
+        console.log("Content ID:", contentId);
         if (contentId) {
           console.log("Content ID:", contentId);
+          setMessage("Upload successful, please go to the lessons page to view your lesson!");
+          setMessageType("success");
           await lesson.generateLessons(contentId);
 
           setPdf(null);
-          setMessage("Upload successful, please go to the lessons page to view your lesson!");
-          setMessageType("success");
+
         } else {
           throw new Error("Content ID not found in response.");
         }
@@ -81,16 +81,16 @@ function UploadPage() {
         const res = await content.processYoutube(youtubeUrl);
         console.log("Youtube response:", res);
 
-        // Robustly get the content ID from the response, which is nested in the 'content' object.
-        const contentId = res.data.content?._id || res.data.content?.contentId;
+        const contentId = res.data.content?._id || res.data.contentId;
 
         if (contentId) {
           console.log("Content ID:", contentId);
-          await lesson.generateLessons(contentId);
-          
-          setYoutubeUrl("");
           setMessage("Upload successful, please go to the lessons page to view your lesson!");
           setMessageType("success");
+          await lesson.generateLessons(contentId);
+
+          setYoutubeUrl("");
+
         } else {
           throw new Error("Content ID not found in response.");
         }

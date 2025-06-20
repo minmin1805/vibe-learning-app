@@ -48,23 +48,32 @@ export const generateLesson = async (req, res) => {
             })
         }
 
-        // Create lesson model
-        const createdLesson = await Lesson.create({
-            userId: req.user._id,
-            contentId: foundContent._id,
-            title: foundContent.title,
-            learningObjectives: JSON.parse(levelLessons[0].content).learningObjectives, // Use Remember level's objectives
-            keyConcepts: JSON.parse(levelLessons[0].content).coreComponents, // Use Remember level's core components
-            sections: levelLessons,
-            summary: foundContent.metadata.description || 'A comprehensive lesson covering key concepts and applications.',
-            status: 'draft'
-        })
+        const rememberLevelContent = JSON.parse(levelLessons[0].content);
 
-        await createdLesson.save()
+        const newLesson = new Lesson({
+            userId: foundContent.userId,
+            contentId,
+            title: foundContent.title,
+            summary: foundContent.metadata.description || 'A comprehensive lesson covering key concepts and applications.',
+            learningObjectives: rememberLevelContent.learningObjectives.map(objectiveText => ({
+                text: objectiveText,
+                bloomLevel: 'remember'
+            })),
+            keyConcepts: rememberLevelContent.coreComponents.map(component => ({
+                concept: component.term,
+                explanation: component.definition,
+                examples: []
+            })),
+            sections: levelLessons,
+            status: 'draft',
+            generatedAt: new Date(),
+        });
+
+        await newLesson.save();
 
         res.status(201).json({
             message: "Lesson generated successfully",
-            lesson: createdLesson
+            lesson: newLesson
         })
 
     } catch (error) {

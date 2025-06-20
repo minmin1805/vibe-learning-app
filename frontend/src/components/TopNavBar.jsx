@@ -5,7 +5,7 @@ function TopNavBar({ user }) {
   const linkElements = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Upload Content", path: "/upload" },
-    { name: "My Lessons", path: "/lessons" },
+    { name: "My Lessons", path: "/my-lessons" },
     { name: "Journal", path: "/journal" },
   ];
 
