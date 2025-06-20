@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TopNavBar from "../components/TopNavBar";
 import { auth } from "../services/api";
+import { content } from "../services/api";
+
 
 function UploadPage() {
   const [user, setUser] = useState(null);
@@ -13,6 +15,9 @@ function UploadPage() {
   const [url, setUrl] = useState("");
   const [pdf, setPdf] = useState(null);
   const [youtubeUrl, setYoutubeUrl] = useState("");
+
+  const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState(""); // 'success' or 'error'
 
   useEffect(() => {
     async function fetchProfile() {
@@ -28,17 +33,36 @@ function UploadPage() {
     fetchProfile();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (selectedUploadType === "URL") {
-      console.log("URL:", url);
-      setUrl("");
-    } else if (selectedUploadType === "PDF") {
-      console.log("PDF:", pdf);
-      setPdf(null);
-    } else if (selectedUploadType === "Youtube") {
-      console.log("Youtube URL:", youtubeUrl);
-      setYoutubeUrl("");
+    setMessage("");
+    setMessageType("");
+    try {
+      if (selectedUploadType === "URL") {
+        console.log("URL:", url);
+        const res = await content.processUrl(url);
+        setUrl("");
+        setMessage("Upload successful!");
+        setMessageType("success");
+        console.log("URL response:", res);
+      } else if (selectedUploadType === "PDF") {
+        console.log("PDF:", pdf);
+        const res = await content.processPdf(pdf);
+        setPdf(null);
+        setMessage("Upload successful!");
+        setMessageType("success");
+        console.log("PDF response:", res);
+      } else if (selectedUploadType === "Youtube") {
+        console.log("Youtube URL:", youtubeUrl);
+        const res = await content.processYoutube(youtubeUrl);
+        setYoutubeUrl("");
+        setMessage("Upload successful!");
+        setMessageType("success");
+        console.log("Youtube response:", res);
+      }
+    } catch (error) {
+      setMessage("Upload failed. Please try again.");
+      setMessageType("error");
     }
   };
 
@@ -77,6 +101,12 @@ function UploadPage() {
             onSubmit={handleSubmit}
             className="flex flex-col justify-center mt-5 bg-white p-5 rounded-lg shadow-md min-w-[400px]"
           >
+            {/* Show message if present */}
+            {message && (
+              <div className={`mb-3 text-center font-semibold ${messageType === "success" ? "text-green-600" : "text-red-600"}`}>
+                {message}
+              </div>
+            )}
             {selectedUploadType == "URL" && (
               <div>
                 <label className="text-sm font-bold text-gray-500">

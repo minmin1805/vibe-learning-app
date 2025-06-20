@@ -41,4 +41,18 @@ export const auth = {
     getProfile: async () => api.get("/auth/profile"),
 }
 
+export const content = {
+  processUrl: async (url) => api.post("/content/process-url", { url }),
+  processPdf: async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    return api.post("/content/process-pdf", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
+  processYoutube: async (youtubeUrl) => api.post("/content/process-youtube", { youtubeUrl }),
+}
+
 export default api;
