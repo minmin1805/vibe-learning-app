@@ -2,9 +2,12 @@ import OpenAI from "openai";
 import Content from "../models/Content.js";
 import { bloomLevelPrompts } from "../config/bloomLevel.js";
 import Lesson from "../models/Lesson.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
+    apiKey: process.env['OPENAI_API_KEY']
 })
 
 export const generateLesson = async (req, res) => {

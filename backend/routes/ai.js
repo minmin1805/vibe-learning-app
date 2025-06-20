@@ -6,23 +6,37 @@ import { bloomLevelPrompts } from "../config/bloomLevel.js";
 import Ajv from "ajv";
 import { bloomLevelSchemas } from "../config/bloomLevel.js";
 import OpenAI from "openai";
+import Content from "../models/Content.js";
+import dotenv from "dotenv";
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
-})
-
-const ajv = new Ajv();
+dotenv.config();
 
 const router = express.Router();
 
+
+const openai = new OpenAI({
+    apiKey: process.env['OPENAI_API_KEY'],
+  });
+
+const ajv = new Ajv();
+
+
 router.post("/test-bloom-level", verifyToken, async (req, res) => {
     try {
-      const { level, content } = req.body;
+      const { level, contentId } = req.body;
   
-      if (!level || !content) {
+      if (!level || !contentId) {
         return res.status(400).json({ 
-          message: 'Level and content are required' 
+          message: 'Level and contentId are required' 
         });
+      }
+
+      const foundContent = await Content.findById(contentId);
+
+      if(!foundContent) {
+        return res.status(404).json({
+          message: 'Content not found'
+        })
       }
   
       if (!bloomLevelPrompts[level]) {
@@ -33,7 +47,7 @@ router.post("/test-bloom-level", verifyToken, async (req, res) => {
       }
   
       // Construct the prompt
-      const prompt = `${bloomLevelPrompts[level]}\n\nContent: ${content}`;
+      const prompt = `${bloomLevelPrompts[level]}\n\nContent: ${foundContent.extractedText}`;
   
       // Generate content using OpenAI
       const completion = await openai.chat.completions.create({
@@ -70,3 +84,5 @@ router.post("/test-bloom-level", verifyToken, async (req, res) => {
       });
     }
   });
+
+export default router;

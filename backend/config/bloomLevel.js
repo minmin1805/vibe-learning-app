@@ -4,16 +4,21 @@ export const bloomLevelSchemas = {
   remember: {
     type: "object",
     properties: {
-      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      learningObjectives: {
+        type: "array",
+        items: { type: "string" },
+        minItems: 3,
+        maxItems: 5,
+      },
       openingQuestion: { type: "string" },
       shortAnswer: { type: "string" },
       keyDefinition: {
         type: "object",
         properties: {
           title: { type: "string" },
-          definition: { type: "string" }
+          definition: { type: "string" },
         },
-        required: ["title", "definition"]
+        required: ["title", "definition"],
       },
       coreComponents: {
         type: "array",
@@ -21,28 +26,36 @@ export const bloomLevelSchemas = {
           type: "object",
           properties: {
             term: { type: "string" },
-            definition: { type: "string" }
+            definition: { type: "string" },
           },
-          required: ["term", "definition"]
-        }
+          required: ["term", "definition"],
+        },
       },
       knowledgeCheck: {
         type: "object",
         properties: {
           question: { type: "string" },
-          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
-          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+          options: {
+            type: "array",
+            items: { type: "string" },
+            minItems: 4,
+            maxItems: 4,
+          },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 },
         },
-        required: ["question", "options", "correctAnswerIndex"]
+        required: ["question", "options", "correctAnswerIndex"],
       },
       dragAndDrop: {
         type: "object",
         properties: {
           terms: { type: "array", items: { type: "string" } },
           definitions: { type: "array", items: { type: "string" } },
-          correctMatches: { type: "object", additionalProperties: { type: "string" } }
+          correctMatches: {
+            type: "object",
+            additionalProperties: { type: "string" },
+          },
         },
-        required: ["terms", "definitions", "correctMatches"]
+        required: ["terms", "definitions", "correctMatches"],
       },
       deepDive: {
         type: "array",
@@ -50,11 +63,11 @@ export const bloomLevelSchemas = {
           type: "object",
           properties: {
             title: { type: "string" },
-            content: { type: "string" }
+            content: { type: "string" },
           },
-          required: ["title", "content"]
-        }
-      }
+          required: ["title", "content"],
+        },
+      },
     },
     required: [
       "learningObjectives",
@@ -64,21 +77,26 @@ export const bloomLevelSchemas = {
       "coreComponents",
       "knowledgeCheck",
       "dragAndDrop",
-      "deepDive"
-    ]
+      "deepDive",
+    ],
   },
 
   understand: {
     type: "object",
     properties: {
-      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      learningObjectives: {
+        type: "array",
+        items: { type: "string" },
+        minItems: 3,
+        maxItems: 5,
+      },
       conceptExplanation: {
         type: "object",
         properties: {
           title: { type: "string" },
-          explanation: { type: "string" }
+          explanation: { type: "string" },
         },
-        required: ["title", "explanation"]
+        required: ["title", "explanation"],
       },
       examples: {
         type: "array",
@@ -86,10 +104,10 @@ export const bloomLevelSchemas = {
           type: "object",
           properties: {
             scenario: { type: "string" },
-            explanation: { type: "string" }
+            explanation: { type: "string" },
           },
-          required: ["scenario", "explanation"]
-        }
+          required: ["scenario", "explanation"],
+        },
       },
       interactiveComparison: {
         type: "object",
@@ -101,44 +119,54 @@ export const bloomLevelSchemas = {
               type: "object",
               properties: {
                 concept: { type: "string" },
-                characteristics: { type: "array", items: { type: "string" } }
+                characteristics: { type: "array", items: { type: "string" } },
               },
-              required: ["concept", "characteristics"]
-            }
-          }
+              required: ["concept", "characteristics"],
+            },
+          },
         },
-        required: ["title", "items"]
+        required: ["title", "items"],
       },
       understandingCheck: {
         type: "object",
         properties: {
           question: { type: "string" },
-          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
-          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+          options: {
+            type: "array",
+            items: { type: "string" },
+            minItems: 4,
+            maxItems: 4,
+          },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 },
         },
-        required: ["question", "options", "correctAnswerIndex"]
-      }
+        required: ["question", "options", "correctAnswerIndex"],
+      },
     },
     required: [
       "learningObjectives",
       "conceptExplanation",
       "examples",
       "interactiveComparison",
-      "understandingCheck"
-    ]
+      "understandingCheck",
+    ],
   },
 
   apply: {
     type: "object",
     properties: {
-      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      learningObjectives: {
+        type: "array",
+        items: { type: "string" },
+        minItems: 3,
+        maxItems: 5,
+      },
       sectionContent: {
         type: "object",
         properties: {
           title: { type: "string" },
-          content: { type: "string" }
+          content: { type: "string" },
         },
-        required: ["title", "content"]
+        required: ["title", "content"],
       },
       problemSolvingChallenge: {
         type: "array",
@@ -147,50 +175,60 @@ export const bloomLevelSchemas = {
           properties: {
             scenario: { type: "string" },
             approachOptions: { type: "array", items: { type: "string" } },
-            justificationPrompt: { type: "string" }
+            justificationPrompt: { type: "string" },
           },
-          required: ["scenario", "approachOptions", "justificationPrompt"]
-        }
+          required: ["scenario", "approachOptions", "justificationPrompt"],
+        },
       },
       workflowImplementation: {
         type: "object",
         properties: {
           title: { type: "string" },
           steps: { type: "array", items: { type: "string" } },
-          correctOrder: { type: "array", items: { type: "number" } }
+          correctOrder: { type: "array", items: { type: "number" } },
         },
-        required: ["title", "steps", "correctOrder"]
+        required: ["title", "steps", "correctOrder"],
       },
       applicationChallenge: {
         type: "object",
         properties: {
           question: { type: "string" },
-          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
-          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+          options: {
+            type: "array",
+            items: { type: "string" },
+            minItems: 4,
+            maxItems: 4,
+          },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 },
         },
-        required: ["question", "options", "correctAnswerIndex"]
-      }
+        required: ["question", "options", "correctAnswerIndex"],
+      },
     },
     required: [
       "learningObjectives",
       "sectionContent",
       "problemSolvingChallenge",
       "workflowImplementation",
-      "applicationChallenge"
-    ]
+      "applicationChallenge",
+    ],
   },
 
   analyze: {
     type: "object",
     properties: {
-      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      learningObjectives: {
+        type: "array",
+        items: { type: "string" },
+        minItems: 3,
+        maxItems: 5,
+      },
       sectionContent: {
         type: "object",
         properties: {
           title: { type: "string" },
-          content: { type: "string" }
+          content: { type: "string" },
         },
-        required: ["title", "content"]
+        required: ["title", "content"],
       },
       algorithmAnalysis: {
         type: "object",
@@ -198,9 +236,12 @@ export const bloomLevelSchemas = {
           title: { type: "string" },
           characteristics: { type: "array", items: { type: "string" } },
           algorithms: { type: "array", items: { type: "string" } },
-          correctMatches: { type: "object", additionalProperties: { type: "array", items: { type: "string" } } }
+          correctMatches: {
+            type: "object",
+            additionalProperties: { type: "array", items: { type: "string" } },
+          },
         },
-        required: ["title", "characteristics", "algorithms", "correctMatches"]
+        required: ["title", "characteristics", "algorithms", "correctMatches"],
       },
       analysisExercise: {
         type: "array",
@@ -209,50 +250,60 @@ export const bloomLevelSchemas = {
           properties: {
             scenario: { type: "string" },
             reasonOptions: { type: "array", items: { type: "string" } },
-            analysisPrompt: { type: "string" }
+            analysisPrompt: { type: "string" },
           },
-          required: ["scenario", "reasonOptions", "analysisPrompt"]
-        }
+          required: ["scenario", "reasonOptions", "analysisPrompt"],
+        },
       },
       criticalAnalysis: {
         type: "object",
         properties: {
           question: { type: "string" },
-          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
-          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+          options: {
+            type: "array",
+            items: { type: "string" },
+            minItems: 4,
+            maxItems: 4,
+          },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 },
         },
-        required: ["question", "options", "correctAnswerIndex"]
-      }
+        required: ["question", "options", "correctAnswerIndex"],
+      },
     },
     required: [
       "learningObjectives",
       "sectionContent",
       "algorithmAnalysis",
       "analysisExercise",
-      "criticalAnalysis"
-    ]
+      "criticalAnalysis",
+    ],
   },
 
   evaluate: {
     type: "object",
     properties: {
-      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      learningObjectives: {
+        type: "array",
+        items: { type: "string" },
+        minItems: 3,
+        maxItems: 5,
+      },
       sectionContent: {
         type: "object",
         properties: {
           title: { type: "string" },
-          content: { type: "string" }
+          content: { type: "string" },
         },
-        required: ["title", "content"]
+        required: ["title", "content"],
       },
       evaluationFramework: {
         type: "object",
         properties: {
           title: { type: "string" },
           criteria: { type: "array", items: { type: "string" } },
-          context: { type: "string" }
+          context: { type: "string" },
         },
-        required: ["title", "criteria", "context"]
+        required: ["title", "criteria", "context"],
       },
       businessContextEvaluation: {
         type: "array",
@@ -261,20 +312,25 @@ export const bloomLevelSchemas = {
           properties: {
             scenario: { type: "string" },
             approachOptions: { type: "array", items: { type: "string" } },
-            justificationPrompt: { type: "string" }
+            justificationPrompt: { type: "string" },
           },
-          required: ["scenario", "approachOptions", "justificationPrompt"]
-        }
+          required: ["scenario", "approachOptions", "justificationPrompt"],
+        },
       },
       evaluationChallenge: {
         type: "object",
         properties: {
           question: { type: "string" },
-          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
+          options: {
+            type: "array",
+            items: { type: "string" },
+            minItems: 4,
+            maxItems: 4,
+          },
           correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 },
-          feedback: { type: "string" }
+          feedback: { type: "string" },
         },
-        required: ["question", "options", "correctAnswerIndex", "feedback"]
+        required: ["question", "options", "correctAnswerIndex", "feedback"],
       },
       criticalEvaluation: {
         type: "object",
@@ -283,10 +339,16 @@ export const bloomLevelSchemas = {
           concernOptions: { type: "array", items: { type: "string" } },
           solutionPrompt: { type: "string" },
           metricsPrompt: { type: "string" },
-          feedback: { type: "string" }
+          feedback: { type: "string" },
         },
-        required: ["scenario", "concernOptions", "solutionPrompt", "metricsPrompt", "feedback"]
-      }
+        required: [
+          "scenario",
+          "concernOptions",
+          "solutionPrompt",
+          "metricsPrompt",
+          "feedback",
+        ],
+      },
     },
     required: [
       "learningObjectives",
@@ -294,29 +356,34 @@ export const bloomLevelSchemas = {
       "evaluationFramework",
       "businessContextEvaluation",
       "evaluationChallenge",
-      "criticalEvaluation"
-    ]
+      "criticalEvaluation",
+    ],
   },
 
   create: {
     type: "object",
     properties: {
-      learningObjectives: { type: "array", items: { type: "string" }, minItems: 3, maxItems: 5 },
+      learningObjectives: {
+        type: "array",
+        items: { type: "string" },
+        minItems: 3,
+        maxItems: 5,
+      },
       sectionContent: {
         type: "object",
         properties: {
           title: { type: "string" },
-          content: { type: "string" }
+          content: { type: "string" },
         },
-        required: ["title", "content"]
+        required: ["title", "content"],
       },
       creativeChallenge: {
         type: "object",
         properties: {
           title: { type: "string" },
-          problemDomains: { type: "array", items: { type: "string" } }
+          problemDomains: { type: "array", items: { type: "string" } },
         },
-        required: ["title", "problemDomains"]
+        required: ["title", "problemDomains"],
       },
       solutionBlueprint: {
         type: "object",
@@ -327,13 +394,13 @@ export const bloomLevelSchemas = {
               type: "object",
               properties: {
                 title: { type: "string" },
-                prompt: { type: "string" }
+                prompt: { type: "string" },
               },
-              required: ["title", "prompt"]
-            }
-          }
+              required: ["title", "prompt"],
+            },
+          },
         },
-        required: ["sections"]
+        required: ["sections"],
       },
       implementationRoadmap: {
         type: "object",
@@ -344,22 +411,27 @@ export const bloomLevelSchemas = {
               type: "object",
               properties: {
                 title: { type: "string" },
-                steps: { type: "array", items: { type: "string" } }
+                steps: { type: "array", items: { type: "string" } },
               },
-              required: ["title", "steps"]
-            }
-          }
+              required: ["title", "steps"],
+            },
+          },
         },
-        required: ["phases"]
+        required: ["phases"],
       },
       synthesisChallenge: {
         type: "object",
         properties: {
           question: { type: "string" },
-          options: { type: "array", items: { type: "string" }, minItems: 4, maxItems: 4 },
-          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 }
+          options: {
+            type: "array",
+            items: { type: "string" },
+            minItems: 4,
+            maxItems: 4,
+          },
+          correctAnswerIndex: { type: "number", minimum: 0, maximum: 3 },
         },
-        required: ["question", "options", "correctAnswerIndex"]
+        required: ["question", "options", "correctAnswerIndex"],
       },
       solutionPresentation: {
         type: "object",
@@ -371,14 +443,14 @@ export const bloomLevelSchemas = {
               properties: {
                 title: { type: "string" },
                 prompt: { type: "string" },
-                timeLimit: { type: "string" }
+                timeLimit: { type: "string" },
               },
-              required: ["title", "prompt", "timeLimit"]
-            }
-          }
+              required: ["title", "prompt", "timeLimit"],
+            },
+          },
         },
-        required: ["sections"]
-      }
+        required: ["sections"],
+      },
     },
     required: [
       "learningObjectives",
@@ -387,208 +459,119 @@ export const bloomLevelSchemas = {
       "solutionBlueprint",
       "implementationRoadmap",
       "synthesisChallenge",
-      "solutionPresentation"
-    ]
-  }
+      "solutionPresentation",
+    ],
+  },
 };
 
-
 export const bloomLevelPrompts = {
-    remember: `Create the "Remember" section of a lesson following Bloom's Taxonomy.
-    Return ONLY a JSON object matching this schema:
+  remember: `Create the "Remember" section of a lesson based on the provided text, following Bloom's Taxonomy.
+    You MUST return ONLY a valid JSON object that strictly adheres to the following schema and constraints. Do not include any explanatory text, markdown, or code block syntax around the JSON.
+
+    Constraints:
+    - learningObjectives: MUST be an array of 3 to 5 strings.
+    - knowledgeCheck.options: MUST be an array of exactly 4 strings.
+    - dragAndDrop: The 'terms' and 'definitions' arrays MUST have the same number of items. 'correctMatches' MUST correctly map each term to its definition.
+
+    Schema:
     {
-      "learningObjectives": ["string"],
+      "learningObjectives": ["string", "string", "string"],
       "openingQuestion": "string",
       "shortAnswer": "string",
-      "keyDefinition": {
-        "title": "string",
-        "definition": "string"
-      },
-      "coreComponents": [
-        {
-          "term": "string",
-          "definition": "string"
-        }
-      ],
-      "knowledgeCheck": {
-        "question": "string",
-        "options": ["string"],
-        "correctAnswerIndex": number
-      },
-      "dragAndDrop": {
-        "terms": ["string"],
-        "definitions": ["string"],
-        "correctMatches": {"term": "definition"}
-      },
-      "deepDive": [
-        {
-          "title": "string",
-          "content": "string"
-        }
-      ]
+      "keyDefinition": { "title": "string", "definition": "string" },
+      "coreComponents": [{ "term": "string", "definition": "string" }],
+      "knowledgeCheck": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0 },
+      "dragAndDrop": { "terms": ["string"], "definitions": ["string"], "correctMatches": {"term": "definition"} },
+      "deepDive": [{ "title": "string", "content": "string" }]
     }`,
-  
-    understand: `Create the "Understand" section of a lesson following Bloom's Taxonomy.
-    Return ONLY a JSON object matching this schema:
+
+  understand: `Create the "Understand" section of a lesson based on the provided text, following Bloom's Taxonomy.
+    You MUST return ONLY a valid JSON object that strictly adheres to the following schema and constraints. Do not include any explanatory text, markdown, or code block syntax around the JSON.
+
+    Constraints:
+    - learningObjectives: MUST be an array of 3 to 5 strings.
+    - examples: MUST contain 2 to 3 scenario/explanation pairs.
+    - interactiveComparison.items: MUST contain at least 2 concepts for comparison.
+    - understandingCheck.options: MUST be an array of exactly 4 strings.
+
+    Schema:
     {
-      "learningObjectives": ["string"],
-      "conceptExplanation": {
-        "title": "string",
-        "explanation": "string"
-      },
-      "examples": [
-        {
-          "scenario": "string",
-          "explanation": "string"
-        }
-      ],
-      "interactiveComparison": {
-        "title": "string",
-        "items": [
-          {
-            "concept": "string",
-            "characteristics": ["string"]
-          }
-        ]
-      },
-      "understandingCheck": {
-        "question": "string",
-        "options": ["string"],
-        "correctAnswerIndex": number
-      }
+      "learningObjectives": ["string", "string", "string"],
+      "conceptExplanation": { "title": "string", "explanation": "string" },
+      "examples": [{ "scenario": "string", "explanation": "string" }, { "scenario": "string", "explanation": "string" }],
+      "interactiveComparison": { "title": "string", "items": [{ "concept": "string", "characteristics": ["string"] }, { "concept": "string", "characteristics": ["string"] }] },
+      "understandingCheck": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0 }
     }`,
-  
-    apply: `Create the "Apply" section of a lesson following Bloom's Taxonomy.
-    Return ONLY a JSON object matching this schema:
+
+  apply: `Create the "Apply" section of a lesson based on the provided text, following Bloom's Taxonomy.
+    You MUST return ONLY a valid JSON object that strictly adheres to the following schema and constraints. Do not include any explanatory text, markdown, or code block syntax around the JSON.
+
+    Constraints:
+    - learningObjectives: MUST be an array of 3 to 5 strings.
+    - problemSolvingChallenge: MUST contain 1 to 2 scenarios.
+    - workflowImplementation.steps and correctOrder: The 'correctOrder' array MUST be a permutation of the indices of the 'steps' array.
+    - applicationChallenge.options: MUST be an array of exactly 4 strings.
+
+    Schema:
     {
-      "learningObjectives": ["string"],
-      "sectionContent": {
-        "title": "string",
-        "content": "string"
-      },
-      "problemSolvingChallenge": [
-        {
-          "scenario": "string",
-          "approachOptions": ["string"],
-          "justificationPrompt": "string"
-        }
-      ],
-      "workflowImplementation": {
-        "title": "string",
-        "steps": ["string"],
-        "correctOrder": [number]
-      },
-      "applicationChallenge": {
-        "question": "string",
-        "options": ["string"],
-        "correctAnswerIndex": number
-      }
+      "learningObjectives": ["string", "string", "string"],
+      "sectionContent": { "title": "string", "content": "string" },
+      "problemSolvingChallenge": [{ "scenario": "string", "approachOptions": ["string"], "justificationPrompt": "string" }],
+      "workflowImplementation": { "title": "string", "steps": ["string"], "correctOrder": [0, 1, 2] },
+      "applicationChallenge": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0 }
     }`,
-  
-    analyze: `Create the "Analyze" section of a lesson following Bloom's Taxonomy.
-    Return ONLY a JSON object matching this schema:
+
+  analyze: `Create the "Analyze" section of a lesson based on the provided text, following Bloom's Taxonomy.
+    You MUST return ONLY a valid JSON object that strictly adheres to the following schema and constraints. Do not include any explanatory text, markdown, or code block syntax around the JSON.
+    
+    Constraints:
+    - learningObjectives: MUST be an array of 3 to 5 strings.
+    - algorithmAnalysis.correctMatches: The keys MUST be from 'characteristics' and values MUST be arrays of items from 'algorithms'.
+    - analysisExercise: MUST contain 1 to 2 exercises.
+    - criticalAnalysis.options: MUST be an array of exactly 4 strings.
+
+    Schema:
     {
-      "learningObjectives": ["string"],
-      "sectionContent": {
-        "title": "string",
-        "content": "string"
-      },
-      "algorithmAnalysis": {
-        "title": "string",
-        "characteristics": ["string"],
-        "algorithms": ["string"],
-        "correctMatches": {"characteristic": ["algorithm"]}
-      },
-      "analysisExercise": [
-        {
-          "scenario": "string",
-          "reasonOptions": ["string"],
-          "analysisPrompt": "string"
-        }
-      ],
-      "criticalAnalysis": {
-        "question": "string",
-        "options": ["string"],
-        "correctAnswerIndex": number
-      }
+      "learningObjectives": ["string", "string", "string"],
+      "sectionContent": { "title": "string", "content": "string" },
+      "algorithmAnalysis": { "title": "string", "characteristics": ["string"], "algorithms": ["string"], "correctMatches": {"characteristic": ["algorithm"]} },
+      "analysisExercise": [{ "scenario": "string", "reasonOptions": ["string"], "analysisPrompt": "string" }],
+      "criticalAnalysis": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0 }
     }`,
-  
-    evaluate: `Create the "Evaluate" section of a lesson following Bloom's Taxonomy.
-    Return ONLY a JSON object matching this schema:
+
+  evaluate: `Create the "Evaluate" section of a lesson based on the provided text, following Bloom's Taxonomy.
+    You MUST return ONLY a valid JSON object that strictly adheres to the following schema and constraints. Do not include any explanatory text, markdown, or code block syntax around the JSON.
+
+    Constraints:
+    - learningObjectives: MUST be an array of 3 to 5 strings.
+    - businessContextEvaluation: MUST contain 1 to 2 scenarios.
+    - evaluationChallenge.options: MUST be an array of exactly 4 strings.
+
+    Schema:
     {
-      "learningObjectives": ["string"],
-      "sectionContent": {
-        "title": "string",
-        "content": "string"
-      },
-      "evaluationFramework": {
-        "title": "string",
-        "criteria": ["string"],
-        "context": "string"
-      },
-      "businessContextEvaluation": [
-        {
-          "scenario": "string",
-          "approachOptions": ["string"],
-          "justificationPrompt": "string"
-        }
-      ],
-      "evaluationChallenge": {
-        "question": "string",
-        "options": ["string"],
-        "correctAnswerIndex": number,
-        "feedback": "string"
-      },
-      "criticalEvaluation": {
-        "scenario": "string",
-        "concernOptions": ["string"],
-        "solutionPrompt": "string",
-        "metricsPrompt": "string",
-        "feedback": "string"
-      }
+      "learningObjectives": ["string", "string", "string"],
+      "sectionContent": { "title": "string", "content": "string" },
+      "evaluationFramework": { "title": "string", "criteria": ["string"], "context": "string" },
+      "businessContextEvaluation": [{ "scenario": "string", "approachOptions": ["string"], "justificationPrompt": "string" }],
+      "evaluationChallenge": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0, "feedback": "string" },
+      "criticalEvaluation": { "scenario": "string", "concernOptions": ["string"], "solutionPrompt": "string", "metricsPrompt": "string", "feedback": "string" }
     }`,
-  
-    create: `Create the "Create" section of a lesson following Bloom's Taxonomy.
-    Return ONLY a JSON object matching this schema:
+
+  create: `Create the "Create" section of a lesson based on the provided text, following Bloom's Taxonomy.
+    You MUST return ONLY a valid JSON object that strictly adheres to the following schema and constraints. Do not include any explanatory text, markdown, or code block syntax around the JSON.
+
+    Constraints:
+    - learningObjectives: MUST be an array of 3 to 5 strings.
+    - synthesisChallenge.options: MUST be an array of exactly 4 strings.
+
+    Schema:
     {
-      "learningObjectives": ["string"],
-      "sectionContent": {
-        "title": "string",
-        "content": "string"
-      },
-      "creativeChallenge": {
-        "title": "string",
-        "problemDomains": ["string"]
-      },
-      "solutionBlueprint": {
-        "sections": [
-          {
-            "title": "string",
-            "prompt": "string"
-          }
-        ]
-      },
-      "implementationRoadmap": {
-        "phases": [
-          {
-            "title": "string",
-            "steps": ["string"]
-          }
-        ]
-      },
-      "synthesisChallenge": {
-        "question": "string",
-        "options": ["string"],
-        "correctAnswerIndex": number
-      },
-      "solutionPresentation": {
-        "sections": [
-          {
-            "title": "string",
-            "prompt": "string",
-            "timeLimit": "string"
-          }
-        ]
-      }
-    }`
-  }; 
+      "learningObjectives": ["string", "string", "string"],
+      "sectionContent": { "title": "string", "content": "string" },
+      "creativeChallenge": { "title": "string", "problemDomains": ["string"] },
+      "solutionBlueprint": { "sections": [{ "title": "string", "prompt": "string" }] },
+      "implementationRoadmap": { "phases": [{ "title": "string", "steps": ["string"] }] },
+      "synthesisChallenge": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0 },
+      "solutionPresentation": { "sections": [{ "title": "string", "prompt": "string", "timeLimit": "string" }] }
+    }`,
+};
