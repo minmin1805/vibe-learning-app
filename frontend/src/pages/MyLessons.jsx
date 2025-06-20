@@ -2,22 +2,29 @@ import TopNavBar from '../components/TopNavBar'
 import { auth, lesson} from '../services/api'
 import React, { useEffect, useState } from 'react'
 import LessonCard from '../components/MyLessonComp/LessonCard'
+import LessonViewer from './LessonViewer'
+import { useNavigate } from 'react-router-dom';
 
 function MyLessons() {
   const [user, setUser] = useState(null);
   const [lessons, setLessons] = useState([]);
-
+  const [chosenLesson, setChosenLesson] = useState(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchUser = async () => {
       const res = await auth.getProfile();
       setUser(res.data.user);
-      console.log(res.data.user);
       const lessonsRes = await lesson.getLessons();
-      console.log(lessonsRes.data.lessons);
       setLessons(lessonsRes.data.lessons);
     }
     fetchUser();
   }, []);
+
+  const handleLessonClick = (lesson) => {
+    setChosenLesson(lesson);
+    console.log(lesson._id);
+    navigate(`/my-lessons/${lesson._id}`);
+  }
 
   return (
     <div className="bg-gray-100 h-screen">
@@ -28,10 +35,10 @@ function MyLessons() {
 
         <h1 className="text-2xl font-bold mt-7">My Lessons</h1>
 
-        <div className="grid grid-cols-3 m-2 bg-white rounded-lg p-4 shadow-md">
+        <div className="grid grid-cols-3 m-2 bg-white rounded-lg p-4 shadow-md gap-4">
 
             {lessons.map((eachLesson) => (
-                <LessonCard key={eachLesson._id} lesson={eachLesson} />
+                <LessonCard handleLessonClick={handleLessonClick} key={eachLesson._id} lesson={eachLesson} />
             ))}
         </div>
     </div>

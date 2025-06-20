@@ -1,8 +1,8 @@
 import React from 'react'
 
-function LessonCard({lesson}) {
+function LessonCard({lesson, handleLessonClick}) {
   return (
-    <div className="bg-white rounded-lg p-4 shadow-md">
+    <div onClick={() => handleLessonClick(lesson)} className="bg-white rounded-lg p-4 shadow-md">
       <h1>{lesson.title}</h1>
       <p>{lesson.createdAt}</p>
       <p>{lesson.summary}</p>

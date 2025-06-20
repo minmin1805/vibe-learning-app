@@ -9,7 +9,6 @@ function TopNavBar({ user }) {
     { name: "Journal", path: "/journal" },
   ];
 
-  console.log(user);
 
   const userInitials = user?.name
     .split(" ")
