@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.post("/generate", verifyToken, generateLesson);
 
-router.get("/", getLessons);
+router.get("/", verifyToken, getLessons);
 
-router.get("/:id", getLessonById);
+router.get("/:id", verifyToken, getLessonById);
 
 export default router;

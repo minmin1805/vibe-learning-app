@@ -11,15 +11,16 @@ function MyLessons() {
     const fetchUser = async () => {
       const res = await auth.getProfile();
       setUser(res.data.user);
-      const res2 = await lesson.getLessons();
-      console.log(res2.data);
-      setLessons(res2.data.lessons);
+      console.log(res.data.user);
+      const lessonsRes = await lesson.getLessons();
+      console.log(lessonsRes.data.lessons);
+      setLessons(lessonsRes.data.lessons);
     }
     fetchUser();
   }, []);
 
   return (
-    <div>
+    <div className="bg-gray-100 h-screen">
       <TopNavBar user={user} />
       
     <div className="flex flex-col justify-center m-5">
@@ -27,9 +28,11 @@ function MyLessons() {
 
         <h1 className="text-2xl font-bold mt-7">My Lessons</h1>
 
-        <div className="grid grid-cols-3 m-2">
+        <div className="grid grid-cols-3 m-2 bg-white rounded-lg p-4 shadow-md">
 
-            
+            {lessons.map((eachLesson) => (
+                <LessonCard key={eachLesson._id} lesson={eachLesson} />
+            ))}
         </div>
     </div>
 
