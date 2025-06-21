@@ -34,7 +34,7 @@ function LessonViewer() {
   }
 
   return (
-    <div className="flex flex-col h-screen justify-center items-center">
+    <div className="flex flex-col h-screen items-center">
       <h1 className="text-2xl font-bold">{lessonData?.title}</h1>
 
       <div className="flex flex-wrap gap-2 mt-5">
