@@ -35,7 +35,7 @@ function MyLessons() {
 
         <h1 className="text-2xl font-bold mt-7">My Lessons</h1>
 
-        <div className="grid grid-cols-3 m-2 bg-white rounded-lg p-4 shadow-md gap-4">
+        <div className="grid grid-cols-3 mt-5 bg-white rounded-lg p-4 shadow-md gap-4">
 
             {lessons.map((eachLesson) => (
                 <LessonCard handleLessonClick={handleLessonClick} key={eachLesson._id} lesson={eachLesson} />
