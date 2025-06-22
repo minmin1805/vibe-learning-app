@@ -11,6 +11,7 @@ import authRoutes from "./routes/auth.js";
 import contentRoutes from "./routes/content.js";
 import lessonRoutes from "./routes/lesson.js";
 import aiRoutes from "./routes/ai.js";
+import journalRoutes from "./routes/journal.js";
 
 dotenv.config();
 const app = express();
@@ -37,6 +38,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/content", contentRoutes);
 app.use("/api/lesson", lessonRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/journal", journalRoutes);
 
 // Serve upload folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
