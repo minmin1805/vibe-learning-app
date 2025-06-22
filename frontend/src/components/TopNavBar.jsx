@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 function TopNavBar({ user }) {
   const linkElements = [
@@ -8,7 +8,6 @@ function TopNavBar({ user }) {
     { name: "My Lessons", path: "/my-lessons" },
     { name: "Journal", path: "/journal" },
   ];
-
 
   const userInitials = user?.name
     .split(" ")
@@ -24,13 +23,15 @@ function TopNavBar({ user }) {
 
         <div className="flex gap-4">
           {linkElements.map((eachElement, index) => (
-            <Link
+            <NavLink
               key={index}
               to={eachElement.path}
-              className="text-blue-800 font-semibold"
+              className={({ isActive }) =>
+                `font-semibold ${isActive ? "text-blue-800" : "text-black"}`
+              }
             >
               {eachElement.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
 
