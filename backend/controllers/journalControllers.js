@@ -1,4 +1,4 @@
-import Journal from "../models/Journal";
+import Journal from "../models/Journal.js";
 
 export const getJournals = async (req, res) => {
   try {

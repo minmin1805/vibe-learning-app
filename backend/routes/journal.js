@@ -1,13 +1,14 @@
 import express from "express";
-import {getJournals, getJournalById, updateJournal } from "../controllers/journalControllers";
+import {getJournalById, getJournals, updateJournal} from "../controllers/journalControllers.js";
+import {verifyToken} from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 
-router.get("/", getJournals);
+router.get("/", verifyToken, getJournals);
 
-router.get("/:id", getJournalById);
+router.get("/:id", verifyToken, getJournalById);
 
-router.put("/:id", updateJournal);
+router.put("/:id", verifyToken, updateJournal);
 
 export default router;
