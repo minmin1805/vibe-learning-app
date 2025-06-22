@@ -50,7 +50,6 @@ function CreateLevel({ title, content }) {
         </select>
       </div>
 
-
       {/* Solution Blueprint */}
       <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-2 rounded-md pb-8">
         <h2 className="text-[25px] font-bold text-blue-600">
@@ -61,9 +60,7 @@ function CreateLevel({ title, content }) {
         <div className="flex flex-col gap-2 mt-5 p-5">
           {solutionBlueprint?.sections.map((eachSolution, index) => (
             <div key={index}>
-              <h3 className="text-[20px] font-bold ">
-                {eachSolution?.title}
-              </h3>
+              <h3 className="text-[20px] font-bold ">{eachSolution?.title}</h3>
               <p>{eachSolution?.prompt}</p>
               <textarea
                 placeholder="Enter your response here..."
@@ -83,7 +80,31 @@ function CreateLevel({ title, content }) {
       {/* Synthesis Challenge */}
       <KnowledgeCheck data={synthesisChallenge} />
 
-      
+      {/* Solution Presentation */}
+      <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-2 rounded-md pb-8">
+        <h2 className="text-[25px] font-bold text-blue-600">
+          Final Solution Presentation
+        </h2>
+        <p>Prepare your solution for presentation:</p>
+
+        <div className="flex flex-col gap-2 mt-5 p-5">
+          {solutionPresentation?.sections.map((eachSection, index) => (
+            <div key={index}>
+              <h3 className="text-[20px] font-bold ">
+                {eachSection?.title} {eachSection?.timeLimit}
+              </h3>
+              <p>{eachSection?.prompt}</p>
+              <textarea
+                placeholder="Enter your response here..."
+                className="w-full p-2 rounded-md bg-white mt-3"
+              />
+            </div>
+          ))}
+          <button className="w-[100px] p-2 rounded-md bg-blue-500 text-white mt-3 self-end">
+            Submit
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
