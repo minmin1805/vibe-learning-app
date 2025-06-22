@@ -71,6 +71,32 @@ export const generateLesson = async (req, res) => {
 
         await newLesson.save();
 
+        // Create a journal for the lesson
+        const reflectionPrompt = `Based on the following content, generate a single, insightful reflection prompt. The prompt should encourage the user to think critically about how they can apply these concepts to their own experiences or field of interest. The prompt should be a question.
+
+        Content: ${foundContent.extractedText}
+        ---
+        Return a JSON object with a single key "reflectionPrompt" containing the generated question.`;
+        
+
+        const reflectionPromptCompletion = await openai.chat.completions.create({
+            messages: [{ role: 'user', content: reflectionPrompt }],
+            model: 'gpt-4-turbo-preview',
+            response_format: {type: 'json_object'}
+        })
+
+        const reflectionPromptFromAI = JSON.parse(reflectionPromptCompletion.choices[0].message.content);
+
+        const createdJournal = await Journal.create({
+            userId: req.user._id,
+            lessonId: newLesson._id,
+            title: newLesson.title,
+            lessonSummary: newLesson.summary,
+            reflectionPrompt: reflectionPromptFromAI,
+        })
+
+        createdJournal.save();
+
         res.status(201).json({
             message: "Lesson generated successfully",
             lesson: newLesson
