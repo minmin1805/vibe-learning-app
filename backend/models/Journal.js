@@ -24,10 +24,10 @@ const journalSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    entry: {
-        type: String,
-        default: "",
-    },
+    entries: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Entry'
+    }],
     },
     { timestamps: true }
 );

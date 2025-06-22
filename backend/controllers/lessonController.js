@@ -94,9 +94,7 @@ export const generateLesson = async (req, res) => {
             title: newLesson.title,
             lessonSummary: newLesson.summary,
             reflectionPrompt: reflectionPromptFromAI.reflectionPrompt,
-        })
-
-        createdJournal.save();
+        });
 
         res.status(201).json({
             message: "Lesson generated successfully",

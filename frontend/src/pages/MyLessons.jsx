@@ -2,7 +2,6 @@ import TopNavBar from '../components/TopNavBar'
 import { auth, lesson} from '../services/api'
 import React, { useEffect, useState } from 'react'
 import LessonCard from '../components/MyLessonComp/LessonCard'
-import LessonViewer from './LessonViewer'
 import { useNavigate } from 'react-router-dom';
 
 function MyLessons() {

@@ -8,6 +8,7 @@ import UploadPage from "./pages/UploadPage";
 import MyLessons from "./pages/MyLessons";
 import Journal from "./pages/Journal";
 import LessonViewer from "./pages/LessonViewer";
+import JournalViewer from "./pages/JournalViewer";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/my-lessons" element={<MyLessons />} />
         <Route path="/my-lessons/:id" element={<LessonViewer />} />
         <Route path="/journal" element={<Journal />} />
+        <Route path="/journal/:id" element={<JournalViewer />} />
       </Routes>
 
     </Router>

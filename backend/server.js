@@ -12,6 +12,7 @@ import contentRoutes from "./routes/content.js";
 import lessonRoutes from "./routes/lesson.js";
 import aiRoutes from "./routes/ai.js";
 import journalRoutes from "./routes/journal.js";
+import entryRoutes from './routes/entries.js';
 
 dotenv.config();
 const app = express();
@@ -39,6 +40,7 @@ app.use("/api/content", contentRoutes);
 app.use("/api/lesson", lessonRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/journal", journalRoutes);
+app.use("/api/entries", entryRoutes);
 
 // Serve upload folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
