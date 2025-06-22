@@ -8,11 +8,22 @@ import ApplyLevel from "../components/MyLessonComp/BloomLevelsContent/ApplyLevel
 import AnalyzeLevel from "../components/MyLessonComp/BloomLevelsContent/AnalyzeLevel";
 import EvaluateLevel from "../components/MyLessonComp/BloomLevelsContent/EvaluateLevel";
 import CreateLevel from "../components/MyLessonComp/BloomLevelsContent/CreateLevel";
+import TopNavBar from "../components/TopNavBar";
+import { auth } from "../services/api";
 
 function LessonViewer() {
   const { id } = useParams();
   const [lessonData, setLessonData] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState("remember");
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await auth.getProfile();
+      setUser(res.data.user);
+    };
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchLesson = async () => {
@@ -34,7 +45,10 @@ function LessonViewer() {
   }
 
   return (
-    <div className="flex flex-col h-screen items-center">
+    <div>
+      <TopNavBar user={user} />
+
+    <div className="flex flex-col h-screen items-center mt-5">
       <h1 className="text-2xl font-bold">{lessonData?.title}</h1>
 
       <div className="flex flex-wrap gap-2 mt-5">
@@ -97,6 +111,7 @@ function LessonViewer() {
         {selectedLevel === "evaluate" && <EvaluateLevel title={lessonData?.sections[4]?.title} content={JSON.parse(lessonData?.sections[4]?.content)} />}
         {selectedLevel === "create" && <CreateLevel title={lessonData?.sections[5]?.title} content={JSON.parse(lessonData?.sections[5]?.content)} />}
       </div>
+    </div>
     </div>
   );
 }
