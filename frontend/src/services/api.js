@@ -61,4 +61,10 @@ export const lesson = {
   getLessonById: async (id) => await api.get(`/lesson/${id}`),
 }
 
+export const journal = {
+  getJournals: async () => await api.get("/journal"),
+  getJournalById: async (id) => await api.get(`/journal/${id}`),
+  updateJournal: async (id, entry) => await api.put(`/journal/${id}`, { entry }),
+}
+
 export default api;

@@ -3,6 +3,7 @@ import Content from "../models/Content.js";
 import { bloomLevelPrompts } from "../config/bloomLevel.js";
 import Lesson from "../models/Lesson.js";
 import dotenv from "dotenv";
+import Journal from "../models/Journal.js";
 
 dotenv.config();
 
@@ -86,13 +87,13 @@ export const generateLesson = async (req, res) => {
         })
 
         const reflectionPromptFromAI = JSON.parse(reflectionPromptCompletion.choices[0].message.content);
-
+        console.log(reflectionPromptFromAI);
         const createdJournal = await Journal.create({
             userId: req.user._id,
             lessonId: newLesson._id,
             title: newLesson.title,
             lessonSummary: newLesson.summary,
-            reflectionPrompt: reflectionPromptFromAI,
+            reflectionPrompt: reflectionPromptFromAI.reflectionPrompt,
         })
 
         createdJournal.save();
