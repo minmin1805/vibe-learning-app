@@ -12,7 +12,6 @@ function JournalViewer() {
   const { id } = useParams();
   const [entries, setEntries] = useState([]);
   const [isCreatingEntry, setIsCreatingEntry] = useState(false);
-  const [newEntry, setNewEntry] = useState(null);
   const [newEntryTitle, setNewEntryTitle] = useState("");
   const [newEntryContent, setNewEntryContent] = useState("");
   const [selectedEntry, setSelectedEntry] = useState(null);
@@ -52,24 +51,24 @@ function JournalViewer() {
       return;
     }
 
-    const newEntry = await journal.createEntry(id, {
-      title: "New Entry",
-      content: "",
-    });
-    setNewEntry(newEntry.data.entry);
+    // const newEntry = await journal.createEntry(id, {
+    //   title: "New Entry",
+    //   content: "",
+    // });
+    // setNewEntry(newEntry.data.entry);
     setIsCreatingEntry(true);
-    setNewEntryTitle("New Entry");
-    setNewEntryContent("");
+    // setNewEntryTitle("New Entry");
+    // setNewEntryContent("");
   };
 
-  const saveEntry = async () => {
-    const savedEntry = await journal.updateEntry(
+  const saveAndCreateNewEntry = async () => {
+    const savedEntry = await journal.createEntry(
       id,
-      newEntry._id,
-      newEntryTitle,
-      newEntryContent
+      {
+        title: newEntryTitle,
+        content: newEntryContent,
+      }
     );
-    setNewEntry(savedEntry.data.entry);
     setIsCreatingEntry(false);
     setNewEntryTitle("");
     setNewEntryContent("");
@@ -131,11 +130,11 @@ function JournalViewer() {
 
         {/* Journal entry on right bar */}
         <div className="w-2/4 bg-white shadow-md rounded-lg p-4">
-          {isCreatingEntry && newEntry && (
+          {isCreatingEntry && (
             <div>
               <input
                 className="w-full h-10 bg-white rounded-md p-2 border-2 border-gray-300"
-                placeholder={newEntry.title}
+                placeholder={"New entry"}
                 type="text"
                 value={newEntryTitle}
                 onChange={(e) => setNewEntryTitle(e.target.value)}
@@ -169,8 +168,8 @@ function JournalViewer() {
                 onChange={(e) => setNewEntryContent(e.target.value)}
               ></textarea>
               <button
-                onClick={saveEntry}
-                className="self-end bg-blue-500 text-white p-2 rounded-md"
+                onClick={saveAndCreateNewEntry}
+                className="self-end bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 cursor-pointer transition-colors"
               >
                 Save Journal Entry
               </button>
