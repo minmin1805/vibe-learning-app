@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const entrySchema = new mongoose.Schema({
+    title: {
+        type: String,
+        default: "",
+    },
     journalId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Journal",
@@ -13,7 +17,7 @@ const entrySchema = new mongoose.Schema({
     },
     content: {
         type: String,
-        required: true,
+        default: "",
     },
 }, { timestamps: true });
 

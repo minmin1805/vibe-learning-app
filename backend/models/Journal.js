@@ -28,6 +28,10 @@ const journalSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Entry'
     }],
+    keyPoints: [{
+        type: String,
+        required: true,
+    }]
     },
     { timestamps: true }
 );

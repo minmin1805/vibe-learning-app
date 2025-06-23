@@ -94,6 +94,7 @@ export const generateLesson = async (req, res) => {
             title: newLesson.title,
             lessonSummary: newLesson.summary,
             reflectionPrompt: reflectionPromptFromAI.reflectionPrompt,
+            keyPoints: newLesson.keyConcepts.map(concept => concept.concept)
         });
 
         res.status(201).json({
