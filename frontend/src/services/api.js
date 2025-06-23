@@ -66,7 +66,9 @@ export const journal = {
   getJournalById: async (id) => await api.get(`/journal/${id}`),
   updateJournal: async (id, entry) => await api.put(`/journal/${id}`, { entry }),
   getEntries: async (id) => await api.get(`/journal/${id}/entries`),
-  createEntry: async (id) => await api.post(`/journal/${id}/entries`),
+  createEntry: async (id, data) => await api.post(`/journal/${id}/entries`, data),
+  updateEntry: async (journalId, entryId, newEntryTitle, newEntryContent) => await api.put(`/journal/${journalId}/entries/${entryId}`, { newEntryTitle, newEntryContent }),
+  deleteEntry: async (journalId, entryId) => await api.delete(`/journal/${journalId}/entries/${entryId}`),
 }
 
 

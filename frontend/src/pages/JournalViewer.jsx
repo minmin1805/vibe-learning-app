@@ -15,6 +15,7 @@ function JournalViewer() {
   const [newEntry, setNewEntry] = useState(null);
   const [newEntryTitle, setNewEntryTitle] = useState("");
   const [newEntryContent, setNewEntryContent] = useState("");
+  const [selectedEntry, setSelectedEntry] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -46,17 +47,44 @@ function JournalViewer() {
   }, [id]);
 
   const createNewEntry = async () => {
-    const newEntry = await journal.createEntry(id);
+    const newEntry = await journal.createEntry(id, {
+      title: "New Entry",
+      content: ""
+    });
     setNewEntry(newEntry.data.entry);
     setIsCreatingEntry(true);
+    setNewEntryTitle("New Entry");
+    setNewEntryContent("");
   };
 
   const saveEntry = async () => {
-    const savedEntry = await journal.saveEntry(id, newEntryTitle, newEntryContent);
+    const savedEntry = await journal.updateEntry(id, newEntry._id, newEntryTitle, newEntryContent);
     setNewEntry(savedEntry.data.entry);
     setIsCreatingEntry(false);
     setNewEntryTitle("");
     setNewEntryContent("");
+    // Refresh entries list
+    const foundEntries = await journal.getEntries(id);
+    setEntries(foundEntries.data.entries);
+  }
+
+  const selectEntry = (entry) => {
+    setSelectedEntry(entry);
+    setIsCreatingEntry(false);
+  }
+
+  const deleteEntry = async () => {
+    if (!selectedEntry || !selectedEntry._id) return;
+    
+    try {
+      await journal.deleteEntry(id, selectedEntry._id);
+      setSelectedEntry(null);
+      // Refresh entries list
+      const foundEntries = await journal.getEntries(id);
+      setEntries(foundEntries.data.entries);
+    } catch (error) {
+      console.error("Failed to delete entry:", error);
+    }
   }
 
   return (
@@ -73,6 +101,21 @@ function JournalViewer() {
             >
               + New
             </button>
+            {/* List existing entries */}
+            <div className="mt-4 space-y-2">
+              {entries.map((entry) => (
+                <div
+                  key={entry._id}
+                  onClick={() => selectEntry(entry)}
+                  className="p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100"
+                >
+                  <p className="font-medium">{entry.title || "Untitled"}</p>
+                  <p className="text-sm text-gray-500">
+                    {new Date(entry.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -129,10 +172,32 @@ function JournalViewer() {
 
               <textarea className="w-full h-50 bg-white rounded-md p-2 border-2 border-gray-300 mt-3"
                 placeholder="Enter your entry here"
-                value={newEntry.content}
+                value={newEntryContent}
                 onChange={(e) => setNewEntryContent(e.target.value)}
               ></textarea>
               <button onClick={saveEntry}  className="self-end bg-blue-500 text-white p-2 rounded-md">Save Journal Entry</button>
+            </div>
+          )}
+          
+          {/* Show selected entry */}
+          {selectedEntry && !isCreatingEntry && (
+            <div>
+              <div className="flex justify-between items-center mb-3">
+                <h2 className="text-xl font-bold">{selectedEntry.title || "Untitled"}</h2>
+                <button 
+                  onClick={deleteEntry}
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
+              <div className="flex flex-row justify-between mb-3 text-sm text-gray-500">
+                <p>Created: {new Date(selectedEntry.createdAt).toLocaleDateString()}</p>
+                <p>Updated: {new Date(selectedEntry.updatedAt).toLocaleDateString()}</p>
+              </div>
+              <div className="bg-gray-50 p-4 rounded-md">
+                <p className="whitespace-pre-wrap">{selectedEntry.content || "No content"}</p>
+              </div>
             </div>
           )}
         </div>

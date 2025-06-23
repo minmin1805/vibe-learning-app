@@ -108,8 +108,9 @@ export const getEntries = async (req, res) => {
 export const createEntry = async (req, res) => {
     try {
         const {id} = req.params;
+        const { title, content } = req.body;
 
-        const foundJournal = await Journal.findOne({ _id: id, userId: req.user.id });
+        const foundJournal = await Journal.findOne({ _id: id, userId: req.user._id });
 
         if (!foundJournal) {
             return res.status(404).json({
@@ -120,10 +121,11 @@ export const createEntry = async (req, res) => {
 
         const newEntry = await Entry.create({
             journalId: foundJournal._id,
-            userId: req.user.id,
+            userId: req.user._id,
+            title: title || "New Entry",
+            content: content || "",
         });
 
-        // Add the entry to the journal's entries array
         foundJournal.entries.push(newEntry._id);
         await foundJournal.save();
 
@@ -140,3 +142,77 @@ export const createEntry = async (req, res) => {
         });
     }
 }
+
+export const updateEntry = async (req, res) => {
+    try {
+        const { id, entryId } = req.params;
+        const { newEntryTitle, newEntryContent } = req.body;
+
+        // First, verify the journal belongs to the user making the request.
+        const journal = await Journal.findOne({ _id: id, userId: req.user._id });
+        if (!journal) {
+            return res.status(403).json({ success: false, message: "Not authorized to access this journal." });
+        }
+
+        // Now, find and update the entry.
+        // We can also check if the entry belongs to the journal, which is good practice.
+        const updatedEntry = await Entry.findOneAndUpdate(
+            { _id: entryId, journalId: id },
+            { title: newEntryTitle, content: newEntryContent },
+            { new: true }
+        );
+
+        if (!updatedEntry) {
+            return res.status(404).json({ success: false, message: "Entry not found in this journal." });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Entry updated successfully",
+            entry: updatedEntry
+        });
+
+    } catch (error) {
+        console.error("Failed to update entry:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to update entry",
+            error: error.message
+        });
+    }
+};
+
+export const deleteEntry = async (req, res) => {
+    try {
+        const { id, entryId } = req.params;
+
+        // First, verify the journal belongs to the user making the request.
+        const journal = await Journal.findOne({ _id: id, userId: req.user._id });
+        if (!journal) {
+            return res.status(403).json({ success: false, message: "Not authorized to access this journal." });
+        }
+
+        // Find and delete the entry
+        const deletedEntry = await Entry.findOneAndDelete({ _id: entryId, journalId: id });
+        if (!deletedEntry) {
+            return res.status(404).json({ success: false, message: "Entry not found in this journal." });
+        }
+
+        // Remove the entry ID from the journal's entries array
+        journal.entries = journal.entries.filter(entryRef => entryRef.toString() !== entryId);
+        await journal.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Entry deleted successfully"
+        });
+
+    } catch (error) {
+        console.error("Failed to delete entry:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to delete entry",
+            error: error.message
+        });
+    }
+};
