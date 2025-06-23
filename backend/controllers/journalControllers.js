@@ -154,8 +154,7 @@ export const updateEntry = async (req, res) => {
             return res.status(403).json({ success: false, message: "Not authorized to access this journal." });
         }
 
-        // Now, find and update the entry.
-        // We can also check if the entry belongs to the journal, which is good practice.
+        
         const updatedEntry = await Entry.findOneAndUpdate(
             { _id: entryId, journalId: id },
             { title: newEntryTitle, content: newEntryContent },
@@ -186,19 +185,16 @@ export const deleteEntry = async (req, res) => {
     try {
         const { id, entryId } = req.params;
 
-        // First, verify the journal belongs to the user making the request.
         const journal = await Journal.findOne({ _id: id, userId: req.user._id });
         if (!journal) {
             return res.status(403).json({ success: false, message: "Not authorized to access this journal." });
         }
 
-        // Find and delete the entry
         const deletedEntry = await Entry.findOneAndDelete({ _id: entryId, journalId: id });
         if (!deletedEntry) {
             return res.status(404).json({ success: false, message: "Entry not found in this journal." });
         }
 
-        // Remove the entry ID from the journal's entries array
         journal.entries = journal.entries.filter(entryRef => entryRef.toString() !== entryId);
         await journal.save();
 

@@ -47,6 +47,11 @@ function JournalViewer() {
   }, [id]);
 
   const createNewEntry = async () => {
+
+    if(isCreatingEntry) {
+      return;
+    }
+
     const newEntry = await journal.createEntry(id, {
       title: "New Entry",
       content: "",
@@ -97,12 +102,12 @@ function JournalViewer() {
       <TopNavBar user={user} />
       <div className="flex flex-row justify-center items-start gap-5 mt-5 p-4">
         {/* Journal entries on left bar */}
-        <div className="w-1/3 min-w-[320px] bg-white shadow-md rounded-lg p-4">
+        <div className="w-1/4 min-w-[320px] bg-white shadow-md rounded-lg p-4">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">Journal Entries</h1>
             <button
               onClick={createNewEntry}
-              className="bg-blue-500 text-white p-2 rounded-md"
+              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
             >
               + New
             </button>
@@ -125,7 +130,7 @@ function JournalViewer() {
         </div>
 
         {/* Journal entry on right bar */}
-        <div className="w-2/3 min-w-[500px] bg-white shadow-md rounded-lg p-4">
+        <div className="w-2/4 bg-white shadow-md rounded-lg p-4">
           {isCreatingEntry && newEntry && (
             <div>
               <input
@@ -135,24 +140,6 @@ function JournalViewer() {
                 value={newEntryTitle}
                 onChange={(e) => setNewEntryTitle(e.target.value)}
               ></input>
-              <div className="flex flex-row justify-between mt-3">
-                <p>
-                  Created:{" "}
-                  {new Date(newEntry.createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-                <p>
-                  Updated:{" "}
-                  {new Date(newEntry.updatedAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-              </div>
               <div className="flex flex-col gap-2 mt-3 justify-between p-3 bg-gray-100 rounded-md">
                 <p className="text-md font-bold">
                   Lesson Summary: {journalData.title}
@@ -199,7 +186,7 @@ function JournalViewer() {
                 </h2>
                 <button
                   onClick={deleteEntry}
-                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 cursor-pointer"
                 >
                   Delete
                 </button>
