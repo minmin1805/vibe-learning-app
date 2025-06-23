@@ -49,7 +49,7 @@ function JournalViewer() {
   const createNewEntry = async () => {
     const newEntry = await journal.createEntry(id, {
       title: "New Entry",
-      content: ""
+      content: "",
     });
     setNewEntry(newEntry.data.entry);
     setIsCreatingEntry(true);
@@ -58,7 +58,12 @@ function JournalViewer() {
   };
 
   const saveEntry = async () => {
-    const savedEntry = await journal.updateEntry(id, newEntry._id, newEntryTitle, newEntryContent);
+    const savedEntry = await journal.updateEntry(
+      id,
+      newEntry._id,
+      newEntryTitle,
+      newEntryContent
+    );
     setNewEntry(savedEntry.data.entry);
     setIsCreatingEntry(false);
     setNewEntryTitle("");
@@ -66,16 +71,16 @@ function JournalViewer() {
     // Refresh entries list
     const foundEntries = await journal.getEntries(id);
     setEntries(foundEntries.data.entries);
-  }
+  };
 
   const selectEntry = (entry) => {
     setSelectedEntry(entry);
     setIsCreatingEntry(false);
-  }
+  };
 
   const deleteEntry = async () => {
     if (!selectedEntry || !selectedEntry._id) return;
-    
+
     try {
       await journal.deleteEntry(id, selectedEntry._id);
       setSelectedEntry(null);
@@ -85,14 +90,14 @@ function JournalViewer() {
     } catch (error) {
       console.error("Failed to delete entry:", error);
     }
-  }
+  };
 
   return (
-    <div className="w-screen h-screen bg-gray-100 ">
+    <div className="w-screen min-h-screen bg-gray-100 ">
       <TopNavBar user={user} />
-      <div className="flex flex-row justify-center items-center gap-5 mt-5">
+      <div className="flex flex-row justify-center items-start gap-5 mt-5 p-4">
         {/* Journal entries on left bar */}
-        <div className="w-1/4 h-screen bg-white shadow-md rounded-lg p-4">
+        <div className="w-1/3 min-w-[320px] bg-white shadow-md rounded-lg p-4">
           <div className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">Journal Entries</h1>
             <button
@@ -120,7 +125,7 @@ function JournalViewer() {
         </div>
 
         {/* Journal entry on right bar */}
-        <div className="w-1/2 h-screen bg-white shadow-md rounded-lg p-4">
+        <div className="w-2/3 min-w-[500px] bg-white shadow-md rounded-lg p-4">
           {isCreatingEntry && newEntry && (
             <div>
               <input
@@ -128,21 +133,25 @@ function JournalViewer() {
                 placeholder={newEntry.title}
                 type="text"
                 value={newEntryTitle}
-                onChange={(e) =>
-                  setNewEntryTitle(e.target.value)
-                }
+                onChange={(e) => setNewEntryTitle(e.target.value)}
               ></input>
               <div className="flex flex-row justify-between mt-3">
-                <p>Created: {new Date(newEntry.createdAt).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}</p>
-                <p>Updated: {new Date(newEntry.updatedAt).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}</p>
+                <p>
+                  Created:{" "}
+                  {new Date(newEntry.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                <p>
+                  Updated:{" "}
+                  {new Date(newEntry.updatedAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
               </div>
               <div className="flex flex-col gap-2 mt-3 justify-between p-3 bg-gray-100 rounded-md">
                 <p className="text-md font-bold">
@@ -151,40 +160,44 @@ function JournalViewer() {
                 <p className="text-sm text-gray-500">
                   {journalData.lessonSummary}
                 </p>
-                <p className="text-md font-bold">
-                  Key Points:
-                </p>
+                <p className="text-md font-bold">Key Points:</p>
                 <ul>
                   {journalData.keyPoints.map((eachPoint) => (
-                    <li key={eachPoint }>{eachPoint}</li>
+                    <li key={eachPoint}>{eachPoint}</li>
                   ))}
                 </ul>
               </div>
 
               <div className="flex flex-col justify-center p-3 bg-blue-100 rounded-md border-x-4 border-blue-700 mt-3">
-                <p className="font-bold text-blue-500">
-                  Reflection Prompt:
-                </p>
+                <p className="font-bold text-blue-500">Reflection Prompt:</p>
                 <p className="text-sm text-gray-500">
                   {journalData.reflectionPrompt}
                 </p>
               </div>
 
-              <textarea className="w-full h-50 bg-white rounded-md p-2 border-2 border-gray-300 mt-3"
+              <textarea
+                className="w-full h-50 bg-white rounded-md p-2 border-2 border-gray-300 mt-3"
                 placeholder="Enter your entry here"
                 value={newEntryContent}
                 onChange={(e) => setNewEntryContent(e.target.value)}
               ></textarea>
-              <button onClick={saveEntry}  className="self-end bg-blue-500 text-white p-2 rounded-md">Save Journal Entry</button>
+              <button
+                onClick={saveEntry}
+                className="self-end bg-blue-500 text-white p-2 rounded-md"
+              >
+                Save Journal Entry
+              </button>
             </div>
           )}
-          
+
           {/* Show selected entry */}
           {selectedEntry && !isCreatingEntry && (
             <div>
               <div className="flex justify-between items-center mb-3">
-                <h2 className="text-xl font-bold">{selectedEntry.title || "Untitled"}</h2>
-                <button 
+                <h2 className="text-xl font-bold">
+                  {selectedEntry.title || "Untitled"}
+                </h2>
+                <button
                   onClick={deleteEntry}
                   className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600"
                 >
@@ -192,11 +205,19 @@ function JournalViewer() {
                 </button>
               </div>
               <div className="flex flex-row justify-between mb-3 text-sm text-gray-500">
-                <p>Created: {new Date(selectedEntry.createdAt).toLocaleDateString()}</p>
-                <p>Updated: {new Date(selectedEntry.updatedAt).toLocaleDateString()}</p>
+                <p>
+                  Created:{" "}
+                  {new Date(selectedEntry.createdAt).toLocaleDateString()}
+                </p>
+                <p>
+                  Updated:{" "}
+                  {new Date(selectedEntry.updatedAt).toLocaleDateString()}
+                </p>
               </div>
               <div className="bg-gray-50 p-4 rounded-md">
-                <p className="whitespace-pre-wrap">{selectedEntry.content || "No content"}</p>
+                <p className="whitespace-pre-wrap">
+                  {selectedEntry.content || "No content"}
+                </p>
               </div>
             </div>
           )}
