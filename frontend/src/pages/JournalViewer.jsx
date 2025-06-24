@@ -16,7 +16,7 @@ function JournalViewer() {
   const [newEntryContent, setNewEntryContent] = useState("");
   const [selectedEntry, setSelectedEntry] = useState(null);
 
-  useEffect(() => {
+  useEffect(() =>{ 
     const fetchUser = async () => {
       const user = await auth.getProfile();
       setUser(user.data.user);
