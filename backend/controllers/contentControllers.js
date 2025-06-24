@@ -64,6 +64,7 @@ export const processUrlContent = async (req, res) => {
     // console.log(newContent);
 
     await newContent.save();
+    console.log("Content saved successfully");
 
     res.status(200).json({
       success: true,
@@ -71,6 +72,7 @@ export const processUrlContent = async (req, res) => {
       content: newContent,
     });
   } catch (error) {
+    console.error("Error processing url content:", error);
     res.status(500).json({
       success: false,
       message: "Error processing url content",
@@ -187,28 +189,29 @@ export const processYoutubeContent = async (req, res) => {
       .map((seg) => seg.text)
       .join(" ");
 
+    const pmr = transcriptObj.microformat.playerMicroformatRenderer;
+
     const metadata = {
-              wordCount: fullTranscript.split(/\s+/).length,
-        estimatedReadingTime: Math.ceil((transcriptObj.playerMicroformatRenderer.microformat.lengthSeconds) / 60 * 130),
-        sourceUrl: youtubeUrl,
-        author: transcriptObj.microformat.playerMicroformatRenderer.ownerChannelName,
-        publishedDate: transcriptObj.microformat.playerMicroformatRenderer.publishDate,
-        duration: transcriptObj.microformat.playerMicroformatRenderer.lengthSeconds, // for youtube
-        description: transcriptObj.microformat.playerMicroformatRenderer.description,
-    }
+      wordCount: fullTranscript.split(/\s+/).length,
+      estimatedReadingTime: Math.ceil((parseInt(pmr.lengthSeconds) || 0) / 60 * 130),
+      sourceUrl: youtubeUrl,
+      author: pmr.ownerChannelName,
+      publishedDate: pmr.publishDate,
+      duration: pmr.lengthSeconds, // for youtube
+      description: pmr.description?.simpleText || pmr.description || "",
+    };
 
     const newContent = new Content({
       userId: req.user.id,
       type: "youtube",
       originalSource: youtubeUrl,
-      title: transcriptObj.microformat.playerMicroformatRenderer.title,
+      title: pmr.title?.simpleText || pmr.title || transcriptObj.title || "Untitled",
       extractedText: fullTranscript,
       metadata: metadata,
       status: "completed",
       processedAt: new Date(),
     });
 
-    console.log(newContent);
 
     await newContent.save();
 
@@ -217,6 +220,7 @@ export const processYoutubeContent = async (req, res) => {
       content: newContent,
     });
   } catch (error) {
+    console.error("Error processing youtube content:", error);
     res.status(500).json({
       success: false,
       message: "Error processing youtube content",

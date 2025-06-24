@@ -33,6 +33,8 @@ function UploadPage() {
     fetchProfile();
   }, []);
 
+  console.log(user);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -87,7 +89,7 @@ function UploadPage() {
           console.log("Content ID:", contentId);
           setMessage("Upload successful, please go to the lessons page to view your lesson!");
           setMessageType("success");
-          // await lesson.generateLessons(contentId);
+          await lesson.generateLessons(contentId);
 
           setYoutubeUrl("");
 
