@@ -79,7 +79,7 @@ function UploadPage() {
       } else if (selectedUploadType === "Youtube") {
         console.log("Youtube URL:", youtubeUrl);
         const res = await content.processYoutube(youtubeUrl);
-        console.log("Youtube response:", res);
+        console.log("Content response:", res);
 
         const contentId = res.data.content?._id || res.data.contentId;
 
@@ -87,7 +87,7 @@ function UploadPage() {
           console.log("Content ID:", contentId);
           setMessage("Upload successful, please go to the lessons page to view your lesson!");
           setMessageType("success");
-          await lesson.generateLessons(contentId);
+          // await lesson.generateLessons(contentId);
 
           setYoutubeUrl("");
 
