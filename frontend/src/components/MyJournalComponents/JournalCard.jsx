@@ -4,7 +4,7 @@ import { FiCalendar } from 'react-icons/fi'
 function JournalCard({journal, handleJournalClick}) {
     return (
         <div onClick={() => handleJournalClick(journal)} className="bg-white rounded-lg shadow-md h-full overflow-hidden cursor-pointer">
-          <div className="h-45 bg-blue-600 flex flex-col justify-center items-center">
+          <div className="h-45 bg-[#2D2F4A] flex flex-col justify-center items-center">
           <h1 className="text-center text-white text-md font-bold">{journal.title}</h1>
           </div>
           <div className="flex justify-between items-center p-4">

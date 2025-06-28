@@ -97,7 +97,7 @@ function JournalViewer() {
   };
 
   return (
-    <div className="w-screen min-h-screen bg-gray-100 ">
+    <div className="w-screen min-h-screen bg-[#edf9f8] ">
       <TopNavBar user={user} />
       <div className="flex flex-row justify-center items-start gap-5 mt-5 p-4">
         {/* Journal entries on left bar */}
@@ -106,7 +106,7 @@ function JournalViewer() {
             <h1 className="text-2xl font-bold">Journal Entries</h1>
             <button
               onClick={createNewEntry}
-              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
+              className="bg-[#02C6B3] text-white p-2 rounded-md hover:bg-[#025e55] transition-colors cursor-pointer"
             >
               + New
             </button>
@@ -119,7 +119,7 @@ function JournalViewer() {
                   className="p-2 bg-gray-50 rounded cursor-pointer hover:bg-gray-100"
                 >
                   <p className="font-medium">{entry.title || "Untitled"}</p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-[#2D2F4A]">
                     {new Date(entry.createdAt).toLocaleDateString()}
                   </p>
                 </div>
@@ -133,17 +133,17 @@ function JournalViewer() {
           {isCreatingEntry && (
             <div>
               <input
-                className="w-full h-10 bg-white rounded-md p-2 border-2 border-gray-300"
+                className="w-full h-10 bg-white rounded-md p-2 border-2 border-gray-300 mb-8 mt-3"
                 placeholder={"New entry"}
                 type="text"
                 value={newEntryTitle}
                 onChange={(e) => setNewEntryTitle(e.target.value)}
               ></input>
-              <div className="flex flex-col gap-2 mt-3 justify-between p-3 bg-gray-100 rounded-md">
+              <div className="flex flex-col gap-2 mt-3 justify-between p-3 bg-gray-100 rounded-md mb-8">
                 <p className="text-md font-bold">
                   Lesson Summary: {journalData.title}
                 </p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-[#2D2F4A]">
                   {journalData.lessonSummary}
                 </p>
                 <p className="text-md font-bold">Key Points:</p>
@@ -154,9 +154,9 @@ function JournalViewer() {
                 </ul>
               </div>
 
-              <div className="flex flex-col justify-center p-3 bg-blue-100 rounded-md border-x-4 border-blue-700 mt-3">
-                <p className="font-bold text-blue-500">Reflection Prompt:</p>
-                <p className="text-sm text-gray-500">
+              <div className="flex flex-col justify-center p-3 bg-[#FFD38C] rounded-md border-x-4 border-[#ebb842] mt-3 mb-5">
+                <p className="font-bold text-[#c58a00]">Reflection Prompt:</p>
+                <p className="text-sm text-[#2D2F4A]">
                   {journalData.reflectionPrompt}
                 </p>
               </div>
@@ -169,7 +169,7 @@ function JournalViewer() {
               ></textarea>
               <button
                 onClick={saveAndCreateNewEntry}
-                className="self-end bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 cursor-pointer transition-colors"
+                className="self-end bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 cursor-pointer transition-colors mt-5"
               >
                 Save Journal Entry
               </button>
