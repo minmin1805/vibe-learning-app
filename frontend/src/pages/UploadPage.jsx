@@ -109,7 +109,7 @@ function UploadPage() {
       <TopNavBar user={user} />
 
       <div
-        className="bg-blue-50 flex flex-col items-center justify-center"
+        className="bg-[#edf9f8] flex flex-col items-center justify-center"
         style={{ height: "100vh" }}
       >
         <div>
@@ -117,19 +117,19 @@ function UploadPage() {
           <div className="inline-block mt-3">
             <button
               onClick={() => setSelectedUploadType("URL")}
-              className={`bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all mr-2 ${selectedUploadType == "URL" ? "bg-blue-800" : ""}`}
+              className={`bg-[#02C6B3] text-white p-2 rounded-md hover:bg-[#025e55] transition-all mr-2 ${selectedUploadType == "URL" ? "bg-[#025e55]" : ""}`}
             >
               URL
             </button>
             <button
               onClick={() => setSelectedUploadType("PDF")}
-              className={`bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all mr-2 ${selectedUploadType == "PDF" ? "bg-blue-800" : ""}`}
+              className={`bg-[#02C6B3] text-white p-2 rounded-md hover:bg-[#025e55] transition-all mr-2 ${selectedUploadType == "PDF" ? "bg-[#025e55]" : ""}`}
             >
               PDF
             </button>
             <button
               onClick={() => setSelectedUploadType("Youtube")}
-              className={`bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-all ${selectedUploadType == "Youtube" ? "bg-blue-800" : ""}`}
+              className={`bg-[#02C6B3] text-white p-2 rounded-md hover:bg-[#025e55] transition-all ${selectedUploadType == "Youtube" ? "bg-[#025e55]" : ""}`}
             >
               Youtube
             </button>
@@ -158,7 +158,7 @@ function UploadPage() {
                 ></input>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
+                  className="bg-[#02C6B3] text-white p-1 rounded-md hover:bg-[#025e55] transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
                 >
                   Upload & Process
                 </button>
@@ -180,9 +180,9 @@ function UploadPage() {
                 </div>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
+                  className="bg-[#02C6B3] text-white p-1 rounded-md hover:bg-[#02c6b2a6] transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
                 >
-                  Upload & Process
+                  Upload & Process  
                 </button>
               </div>
             )}
@@ -199,7 +199,7 @@ function UploadPage() {
                 ></input>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
+                  className="bg-[#02C6B3] text-white p-1 rounded-md hover:bg-[#02c6b2a6] transition-all w-full font-semibold text-md shadow-md hover:shadow-lg transform hover:scale-105 duration-200"
                 >
                   Upload & Process
                 </button>
