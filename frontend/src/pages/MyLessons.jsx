@@ -26,7 +26,7 @@ function MyLessons() {
   }
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-[#edf9f8] h-screen">
       <TopNavBar user={user} />
       
     <div className="flex flex-col justify-center m-5">
