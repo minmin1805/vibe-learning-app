@@ -24,18 +24,18 @@ function CreateLevel({ title, content }) {
 
       {/* Section Content */}
       <div className="flex flex-col gap-2 mt-5">
-        <h2 className="text-[25px] font-bold">{sectionContent?.title}</h2>
-        <p>{sectionContent?.content}</p>
+        <h2 className="text-2xl font-bold">{sectionContent?.title}</h2>
+        <p className="text-[#2D2F4A]">{sectionContent?.content}</p>
       </div>
 
       {/* Creative Challenge */}
-      <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-2 rounded-md pb-8">
-        <h2 className="text-[25px] font-bold text-blue-600">
+      <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-4 rounded-md pb-8">
+        <h2 className="text-2xl font-bold text-blue-600">
           AI-Generated Creative Challenge
         </h2>
         <p>{creativeChallenge?.title}</p>
 
-        <p className="text-black text-[18px] font-bold mt-5">
+        <p className="text-[#2D2F4A] text-xl font-bold mt-5">
           Select Problem Domain:
         </p>
         <select className="w-[400px] p-2 rounded-md bg-white ">
@@ -51,17 +51,17 @@ function CreateLevel({ title, content }) {
       </div>
 
       {/* Solution Blueprint */}
-      <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-2 rounded-md pb-8">
-        <h2 className="text-[25px] font-bold text-blue-600">
+      <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-4 rounded-md pb-8">
+        <h2 className="text-2xl font-bold text-blue-600">
           Interactive Solution Blueprint
         </h2>
-        <p>Use this template to structure your solution:</p>
+        <p className="text-[#2D2F4A]">Use this template to structure your solution:</p>
 
-        <div className="flex flex-col gap-2 mt-5 p-5">
+        <div className="flex flex-col gap-2 mt-2 p-5">
           {solutionBlueprint?.sections.map((eachSolution, index) => (
             <div key={index}>
-              <h3 className="text-[20px] font-bold ">{eachSolution?.title}</h3>
-              <p>{eachSolution?.prompt}</p>
+              <h3 className="text-xl font-bold ">{eachSolution?.title}</h3>
+              <p className="text-[#2D2F4A]">{eachSolution?.prompt}</p>
               <textarea
                 placeholder="Enter your response here..."
                 className="w-full p-2 rounded-md bg-white mt-3"
@@ -81,19 +81,19 @@ function CreateLevel({ title, content }) {
       <KnowledgeCheck data={synthesisChallenge} />
 
       {/* Solution Presentation */}
-      <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-2 rounded-md pb-8">
-        <h2 className="text-[25px] font-bold text-blue-600">
+      <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-4 rounded-md pb-8 mb-10">
+        <h2 className="text-2xl font-bold text-blue-600">
           Final Solution Presentation
         </h2>
-        <p>Prepare your solution for presentation:</p>
+        <p className="text-[#2D2F4A]">Prepare your solution for presentation:</p>
 
-        <div className="flex flex-col gap-2 mt-5 p-5">
+        <div className="flex flex-col gap-2 mt-2 p-5">
           {solutionPresentation?.sections.map((eachSection, index) => (
             <div key={index}>
-              <h3 className="text-[20px] font-bold ">
+              <h2 className="text-xl font-bold text-[#2D2F4A]">
                 {eachSection?.title} {eachSection?.timeLimit}
-              </h3>
-              <p>{eachSection?.prompt}</p>
+              </h2>
+              <p className="text-[#2D2F4A]">{eachSection?.prompt}</p>
               <textarea
                 placeholder="Enter your response here..."
                 className="w-full p-2 rounded-md bg-white mt-3"

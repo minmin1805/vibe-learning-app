@@ -36,9 +36,9 @@ const KnowledgeCheck = ({ data }) => {
   }
 
   return (
-    <div className='flex flex-col gap-3 mt-6 bg-green-100 p-4 rounded-lg shadow-sm'>
-      <h2 className='text-xl font-bold text-green-800'>Knowledge Check: {title}</h2>
-      <p className="text-gray-700">{question}</p>
+    <div className='flex flex-col gap-3 mt-6 bg-green-100 p-4 rounded-lg shadow-sm m5-10'>
+      <h2 className='text-2xl font-bold text-green-800'>Knowledge Check: {title}</h2>
+      <p className="text-[#2D2F4A]">{question}</p>
       <div className="flex flex-col gap-2">
         {options?.map((option, index) => (
           <button

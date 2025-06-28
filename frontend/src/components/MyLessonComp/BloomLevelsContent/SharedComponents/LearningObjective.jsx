@@ -10,7 +10,7 @@ const LearningObjective = ({ objectives }) => {
       <h2 className='text-xl font-bold text-blue-800'>Learning Objectives</h2>
       <ul className='list-disc list-inside text-gray-700'>
         {objectives.map((objective, index) => (
-          <li key={index} className="mb-1">{objective}</li>
+          <li key={index} className="mb-1 text-[#2D2F4A]">{objective}</li>
         ))}
       </ul>
     </div>

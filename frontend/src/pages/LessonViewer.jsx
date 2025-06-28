@@ -40,18 +40,24 @@ function LessonViewer() {
     }
   }, [id]);
 
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [selectedLevel]);
+
   if (!lessonData) {
     return <div>Loading...</div>;
   }
+
 
   return (
     <div>
       <TopNavBar user={user} />
 
-    <div className="flex flex-col h-screen items-center mt-5">
-      <h1 className="text-2xl font-bold">{lessonData?.title}</h1>
+    <div className="flex flex-col h-screen items-center mt-10">
+      <h1 className="text-2xl font-bold max-w-[80%] text-center mt-3">{lessonData?.title}</h1>
 
-      <div className="flex flex-wrap gap-2 mt-5">
+      <div className="flex flex-wrap gap-2 mt-5 items-center justify-center">
         <button
           onClick={() => setSelectedLevel("remember")}
           className={`bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-blue-700 font-bold ${
@@ -102,7 +108,7 @@ function LessonViewer() {
         </button>
       </div>
 
-      <div>
+      <div className="max-w-[90%]">
         {/* display level content component according to selected level */}
         {selectedLevel === "remember" && <RememberLevel title={lessonData?.sections[0]?.title} content={JSON.parse(lessonData?.sections[0]?.content)} />}
         {selectedLevel === "understand" && <UnderstandLevel title={lessonData?.sections[1]?.title} content={JSON.parse(lessonData?.sections[1]?.content)} />}

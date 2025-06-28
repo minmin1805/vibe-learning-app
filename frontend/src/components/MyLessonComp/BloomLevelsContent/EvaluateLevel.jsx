@@ -1,5 +1,5 @@
 import React from 'react'
-import LearningObjective from './SharedComponents/LearningObjective';
+import LearningObjective from './SharedComponents/LearningObjective.jsx';
 import KnowledgeCheck from './SharedComponents/KnowledgeCheck.jsx';
 import EvaluationFramework from './SharedComponents/EvaluationFramework.jsx';
 import CriticalEvaluation from './SharedComponents/CriticalEvaluation.jsx';
@@ -20,8 +20,8 @@ function EvaluateLevel({ title, content }) {
 
       {/* Section Content */}
       <div className="flex flex-col gap-2 mt-5">
-        <h2 className="text-[25px] font-bold">{sectionContent?.title}</h2>
-        <p>{sectionContent?.content}</p>
+        <h2 className="text-2xl font-bold">{sectionContent?.title}</h2>
+        <p className="text-[#2D2F4A]">{sectionContent?.content}</p>
       </div>
 
       {/* Evaluation Framework */}

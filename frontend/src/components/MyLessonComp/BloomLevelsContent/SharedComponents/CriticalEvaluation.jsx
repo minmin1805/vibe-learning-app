@@ -25,13 +25,13 @@ function CriticalEvaluation({ data }) {
   };
 
   return (
-    <div className="bg-blue-50 p-6 rounded-lg shadow-md my-6">
+    <div className="bg-blue-50 p-6 rounded-lg shadow-md my-6 border-x-5 border-blue-400">
       <h3 className="text-2xl font-bold mb-4 text-gray-800">Critical Evaluation</h3>
-      <p className="mb-4 text-gray-700">{scenario}</p>
+      <p className="mb-4 text-[#2D2F4A]">{scenario}</p>
 
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
-          <h4 className="font-semibold text-lg mb-2 text-gray-800">Identify Key Concerns:</h4>
+          <h4 className="font-semibold text-lg mb-2 text-[#2D2F4A]">Identify Key Concerns:</h4>
           <div className="space-y-2">
             {concernOptions?.map((concern, index) => (
               <div key={index} className="flex items-center">
@@ -43,7 +43,7 @@ function CriticalEvaluation({ data }) {
                   onChange={() => handleConcernToggle(concern)}
                   className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
-                <label htmlFor={`concern-${index}`} className="ml-3 block text-sm font-medium text-gray-700">
+                <label htmlFor={`concern-${index}`} className="ml-3 block text-sm font-medium text-[#2D2F4A]">
                   {concern}
                 </label>
               </div>
@@ -52,7 +52,7 @@ function CriticalEvaluation({ data }) {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="metrics" className="block text-lg font-semibold mb-2 text-gray-800">{metricsPrompt}</label>
+          <label htmlFor="metrics" className="block text-lg font-semibold mb-2 text-[#2D2F4A]">{metricsPrompt}</label>
           <textarea
             id="metrics"
             rows="4"
@@ -64,7 +64,7 @@ function CriticalEvaluation({ data }) {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="solution" className="block text-lg font-semibold mb-2 text-gray-800">{solutionPrompt}</label>
+          <label htmlFor="solution" className="block text-lg font-semibold mb-2 text-[#2D2F4A]">{solutionPrompt}</label>
           <textarea
             id="solution"
             rows="4"

@@ -87,9 +87,9 @@ function InteractiveAlgorithmAnalysis({ analysisData }) {
 
     return (
         <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCenter}>
-            <div className="p-6 bg-white rounded-2xl shadow-lg my-8">
+            <div className="p-6 bg-[#F9FAFC] rounded-2xl shadow-xl my-8">
                 <h2 className="text-2xl font-bold mb-1 text-gray-800">{title}</h2>
-                <p className="text-gray-600 mb-6">Analyze the relationship between these algorithms by connecting them to their characteristics:</p>
+                <p className="text-[#2D2F4A] mb-6">Analyze the relationship between these algorithms by connecting them to their characteristics:</p>
 
                 {/* Characteristics Pool */}
                 <div className="bg-gray-50 p-4 rounded-xl border-2 border-dashed border-gray-200 mb-8">

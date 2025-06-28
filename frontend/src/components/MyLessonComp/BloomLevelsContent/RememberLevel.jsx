@@ -20,6 +20,8 @@ function RememberLevel({ title, content }) {
     deepDive,
   } = content || {};
 
+  
+
 
   return (
     <div className="flex flex-col gap-2 mt-8 m-1">
@@ -31,8 +33,8 @@ function RememberLevel({ title, content }) {
 
       {/* Opening Question */}
       <div className="flex flex-col gap-2 mt-5">
-        <p className="text-[25px] font-bold">{openingQuestion}</p>
-        <p className="">{shortAnswer}</p>
+        <h2 className="text-2xl font-bold">{openingQuestion}</h2>
+        <p className="text-[#2D2F4A]">{shortAnswer}</p>
       </div>
 
       {/* Key Definition */}
@@ -40,12 +42,13 @@ function RememberLevel({ title, content }) {
         <h2 className="text-lg font-bold text-yellow-700">
           Key Definition: {keyDefinition?.title}
         </h2>
-        <p>{keyDefinition?.definition}</p>
+        <p className="text-[#2D2F4A]">{keyDefinition?.definition}</p>
       </div>
+
 
       {/* Core Components */}
       <div className="flex flex-col gap-2 mt-5">
-        <h2 className="text-lg font-bold">Core Components:</h2>
+        <h2 className="text-2xl font-bold">Core Components:</h2>
         <ul>
           {coreComponents?.map((eachCore, index) => (
             <li key={index} className="list-disc list-inside font-bold">
@@ -65,12 +68,12 @@ function RememberLevel({ title, content }) {
 
 
       {/* Deep Dive */}
-      <div className="flex flex-col gap-2 mt-5 bg-red-100 p-2 rounded-md border-x-3 border-red-400">
-        <h2 className="text-lg font-bold">Deep Dive: {deepDive?.title}</h2>
+      <div className="flex flex-col gap-2 mt-5 bg-red-100 p-2 rounded-md border-x-3 border-red-400 mb-10">
+        <h2 className="text-2xl font-bold">Deep Dive: {deepDive?.title}</h2>
         {deepDive?.map((eachDive, index) => (
           <div key={index}>
             <h3 className="text-lg font-bold">{eachDive.title}</h3>
-            <p>{eachDive.content}</p>
+            <p className="text-[#2D2F4A]">{eachDive.content}</p>
           </div>
         ))}
       </div>

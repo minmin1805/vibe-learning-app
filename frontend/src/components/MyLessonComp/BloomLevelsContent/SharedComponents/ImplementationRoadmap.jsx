@@ -155,9 +155,9 @@ function ImplementationRoadmap({ data }) {
   };
   
   return (
-    <div className="bg-gray-50 p-6 rounded-lg shadow-md my-6">
+    <div className="bg-gray-50 p-6 rounded-lg shadow-md my-6 border-x-5 border-gray-400">
       <h2 className="text-2xl font-bold mb-2">Implementation Roadmap Creator</h2>
-      <p className="mb-6 text-gray-600">Create a practical plan by dragging the steps into the correct phase.</p>
+      <p className="mb-6 text-[#2D2F4A]">Create a practical plan by dragging the steps into the correct phase.</p>
       
       <DndContext
         sensors={sensors}

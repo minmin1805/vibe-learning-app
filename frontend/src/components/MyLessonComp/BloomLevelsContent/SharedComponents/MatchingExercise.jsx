@@ -86,7 +86,7 @@ const MatchingExercise = ({ data }) => {
     <DndContext onDragEnd={handleDragEnd}>
       <div className='flex flex-col gap-4 mt-8'>
         <h2 className='text-2xl font-bold'>Match the Terms</h2>
-        <p className="text-gray-600">Drag each term from the bank on the right and drop it onto its correct definition.</p>
+        <p className="text-[#2D2F4A]">Drag each term from the bank on the right and drop it onto its correct definition.</p>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="flex-1 flex flex-col gap-3">
             {definitions.map((def) => (
@@ -94,7 +94,7 @@ const MatchingExercise = ({ data }) => {
             ))}
           </div>
           <div className="w-full lg:w-64 bg-gray-50 p-4 rounded-lg shadow-inner">
-            <h3 className="font-bold text-lg mb-4 text-center text-gray-700">Terms Bank</h3>
+            <h3 className="font-bold text-lg mb-4 text-center text-[#2D2F4A]">Terms Bank</h3>
             {terms.map((term) => (
               <DraggableTerm key={term} term={term} />
             ))}

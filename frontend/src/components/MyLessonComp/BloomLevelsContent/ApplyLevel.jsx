@@ -22,16 +22,16 @@ function ApplyLevel({ title, content }) {
 
       {/* Section Content */}
       <div className="flex flex-col gap-2 mt-5">
-        <h2 className="text-[25px] font-bold">{sectionContent?.title}</h2>
-        <p>{sectionContent?.content}</p>
+        <h2 className="text-2xl font-bold">{sectionContent?.title}</h2>
+        <p className="text-[#2D2F4A]">{sectionContent?.content}</p>
       </div>
 
       {/* Problem Solving Challenge */}
       <div className="flex flex-col gap-2 mt-5 bg-gray-100 p-2 rounded-md">
-        <h2 className="text-[20px] font-bold text-blue-700">
+        <h2 className="text-2xl font-bold text-blue-700">
           AI-Generated Problem Solving Challenges
         </h2>
-        <p>
+        <p className="text-[#2D2F4A]">
           For each scenario, select the most appropriat approach and justify
           your choice:
         </p>
@@ -47,8 +47,12 @@ function ApplyLevel({ title, content }) {
       {/* Workflow Implementation */}
       <WorkflowImplementation workflowImplementation={workflowImplementation} />
 
+
       {/*Application Challenge*/}
+      <div className='mb-10'>
       <KnowledgeCheck data={applicationChallenge} />
+
+      </div>
     </div>
   );
 }

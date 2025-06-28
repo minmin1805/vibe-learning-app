@@ -105,7 +105,7 @@ const InteractiveComparison = ({ data }) => {
     <DndContext onDragEnd={handleDragEnd}>
       <div className="my-8">
         <h2 className="text-2xl font-bold mb-1">{title}</h2>
-        <p className="text-gray-600 mb-4">Drag each characteristic to the correct concept box.</p>
+        <p className="text-[#2D2F4A] mb-4">Drag each characteristic to the correct concept box.</p>
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Characteristics Bank (Draggable Items) */}
           <div className="w-full lg:w-1/3 bg-gray-50 p-4 rounded-lg shadow-inner">

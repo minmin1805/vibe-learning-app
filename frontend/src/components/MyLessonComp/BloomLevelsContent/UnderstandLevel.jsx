@@ -25,8 +25,8 @@ function UnderstandLevel({ title, content }) {
 
       {/* Concept Explanation */}
       <div className="flex flex-col gap-2 mt-5">
-        <h2 className="text-lg font-bold">{conceptExplanation?.title}</h2>
-        <p>{conceptExplanation?.explanation}</p>
+        <h2 className="text-2xl font-bold">{conceptExplanation?.title}</h2>
+        <p className='text-[#2D2F4A]'>{conceptExplanation?.explanation}</p>
       </div>
 
       {/* Matching Exercise */}
@@ -39,12 +39,12 @@ function UnderstandLevel({ title, content }) {
       <InteractiveComparison data={interactiveComparison} />
 
       {/* Examples */}
-      <div className="flex flex-col gap-2 mt-5 bg-red-100 p-2 rounded-md border-x-3 border-red-400">
-        <h2 className="text-lg font-bold">Examples</h2>
+      <div className="flex flex-col gap-2 mt-5 bg-red-100 p-2 rounded-md border-x-3 border-red-400 mb-10">
+        <h2 className="text-2xl font-bold">Examples</h2>
         {examples?.map((eachExample, index) => (
           <div key={index}>
             <h3 className="text-lg font-bold">{eachExample.scenario}</h3>
-            <p>{eachExample.explanation}</p>
+            <p className='text-[#2D2F4A]'>{eachExample.explanation}</p>
           </div>
         ))}
       </div>

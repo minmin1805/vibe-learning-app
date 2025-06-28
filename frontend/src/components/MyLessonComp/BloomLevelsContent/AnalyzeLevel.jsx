@@ -17,8 +17,8 @@ function AnalyzeLevel({ title, content }) {
 
       {/* Section Content */}
       <div className="flex flex-col gap-2 mt-5">
-        <h2 className="text-[25px] font-bold">{sectionContent?.title}</h2>
-        <p>{sectionContent?.content}</p>
+        <h2 className="text-2xl font-bold">{sectionContent?.title}</h2>
+        <p className="text-[#2D2F4A]">{sectionContent?.content}</p>
         
       </div>
 
@@ -32,7 +32,10 @@ function AnalyzeLevel({ title, content }) {
       ))}
 
       {/* Critical Analysis */}
+      <div className='mb-10'>
       <KnowledgeCheck data={criticalAnalysis} />
+
+      </div>
 
       
       </div>

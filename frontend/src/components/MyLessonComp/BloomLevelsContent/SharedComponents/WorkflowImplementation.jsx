@@ -103,7 +103,7 @@ function WorkflowImplementation({ workflowImplementation }) {
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
     return newArray;
-  };
+  };  
 
   const [unassignedSteps, setUnassignedSteps] = useState(() =>
     shuffleArray(stepData)
@@ -190,8 +190,8 @@ function WorkflowImplementation({ workflowImplementation }) {
 
   return (
     <div className="bg-gray-100 p-4 rounded-lg mt-5">
-      <h2 className="text-[20px] font-bold text-blue-700">{title}</h2>
-      <p className="mb-4">{workflowImplementation.description}</p>
+      <h2 className="text-2xl font-bold text-blue-700">{title}</h2>
+      <p className="mb-4 text-[#2D2F4A]">{workflowImplementation.description}</p>
 
       <DndContext
         sensors={sensors}
