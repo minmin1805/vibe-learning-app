@@ -41,7 +41,7 @@ function Signup() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-blue-100">
       <div className="bg-white rounded-lg p-10">
-        <h1 className="text-2xl font-bold text-blue-700 text-center">Signup</h1>
+        <h1 className="text-2xl font-bold text-[#02C6B3] text-center">Signup</h1>
 
 
         <form className=" w-[500px]" onSubmit={handleSubmit}>
@@ -62,11 +62,11 @@ function Signup() {
             <input required onChange={(e) => setPassword(e.target.value)} className="mt-2 border-2 border-gray-300 rounded-md p-2" type="password" placeholder="Enter your password" />
           </div>
 
-          <button className="bg-blue-500 text-white rounded-md p-2 mt-5 w-full hover:bg-blue-600 transition-all duration-300 cursor-pointer font-bold ">Signup</button>
+          <button className="bg-[#02C6B3] text-white rounded-md p-2 mt-5 w-full hover:bg-blue-600 transition-all duration-300 cursor-pointer font-bold ">Signup</button>
 
         </form>
 
-        <p className="text-sm text-center mt-5">Already have an account? <Link to="/login"><span className="text-blue-500">Login</span></Link></p>
+        <p className="text-sm text-center mt-5">Already have an account? <Link to="/login"><span className="text-[#02C6B3]">Login</span></Link></p>
       </div>
     </div>
   );
