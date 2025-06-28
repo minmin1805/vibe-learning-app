@@ -8,7 +8,6 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Optionally, fetch latest profile from backend
     async function fetchProfile() {
       try {
         const res = await auth.getProfile();
