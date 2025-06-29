@@ -170,7 +170,17 @@ export const processYoutubeContent = async (req, res) => {
     }
 
     const client = new TranscriptClient();
-    await client.ready;
+    try {
+      await client.ready;
+      console.log("TranscriptClient initialized!");
+    } catch (initError) {
+      console.error("TranscriptClient failed to initialize:", initError);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to initialize YouTube transcript client.",
+        error: initError.message,
+      });
+    }
     const transcriptObj = await client.getTranscript(videoId);
     // Find the English transcript (manual or auto-generated)
     const englishTrack = transcriptObj.tracks.find(

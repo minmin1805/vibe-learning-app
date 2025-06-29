@@ -141,6 +141,29 @@ export const bloomLevelSchemas = {
         },
         required: ["question", "options", "correctAnswerIndex"],
       },
+      matchingExercise: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          instructions: { type: "string" },
+          items: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                example: { type: "string" },
+                type: { type: "string" }
+              },
+              required: ["example", "type"]
+            }
+          },
+          options: {
+            type: "array",
+            items: { type: "string" }
+          }
+        },
+        required: ["title", "instructions", "items", "options"]
+      }
     },
     required: [
       "learningObjectives",
@@ -148,6 +171,7 @@ export const bloomLevelSchemas = {
       "examples",
       "interactiveComparison",
       "understandingCheck",
+      "matchingExercise"
     ],
   },
 
@@ -493,6 +517,7 @@ export const bloomLevelPrompts = {
     - examples: MUST contain 2 to 3 scenario/explanation pairs.
     - interactiveComparison.items: MUST contain at least 2 concepts for comparison.
     - understandingCheck.options: MUST be an array of exactly 4 strings.
+    - matchingExercise.items: MUST contain 3 to 5 example/type pairs. The options array MUST contain all unique types used in the items.
 
     Schema:
     {
@@ -500,7 +525,15 @@ export const bloomLevelPrompts = {
       "conceptExplanation": { "title": "string", "explanation": "string" },
       "examples": [{ "scenario": "string", "explanation": "string" }, { "scenario": "string", "explanation": "string" }],
       "interactiveComparison": { "title": "string", "items": [{ "concept": "string", "characteristics": ["string"] }, { "concept": "string", "characteristics": ["string"] }] },
-      "understandingCheck": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0 }
+      "understandingCheck": { "question": "string", "options": ["string", "string", "string", "string"], "correctAnswerIndex": 0 },
+      "matchingExercise": {
+        "title": "string",
+        "instructions": "string",
+        "items": [
+          { "example": "string", "type": "string"}
+        ],
+        "options": ["string"]
+      }
     }`,
 
   apply: `Create the "Apply" section of a lesson based on the provided text, following Bloom's Taxonomy.

@@ -8,7 +8,7 @@ function UnderstandLevel({ title, content }) {
 
   console.log(content);
 
-  const {learningObjectives, conceptExplanation, examples, interactiveComparison, understandingCheck} = content
+  const {learningObjectives, conceptExplanation, examples, interactiveComparison, understandingCheck, matchingExercise} = content
 
 
   if (!content) {
@@ -30,7 +30,7 @@ function UnderstandLevel({ title, content }) {
       </div>
 
       {/* Matching Exercise */}
-      <MatchingExercise data={[]} />
+      <MatchingExercise data={matchingExercise} />
 
       {/* Understanding Check */}
       <KnowledgeCheck data={understandingCheck} />
